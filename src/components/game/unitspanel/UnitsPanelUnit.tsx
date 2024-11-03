@@ -2,13 +2,13 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import GameSelectors from '../../../store/game/game.selectors'
 
-interface UnitPanelUnitProperties {
+interface UnitsPanelUnitProperties {
   id: string
 }
 
-export const UnitPanelUnit = ({
+export const UnitsPanelUnit = ({
   id
-}: UnitPanelUnitProperties) => {
+}: UnitsPanelUnitProperties) => {
 
   // #region Hooks //
   const unit = useSelector(GameSelectors.unit(id))
@@ -19,7 +19,7 @@ export const UnitPanelUnit = ({
   // #endregion
 
   // Rendering //
-  const classes = ['ap-dom-unit-panel-unit']
+  const classes = ['ap-dom-units-panel-unit']
   return (
     <li
       className={classes.join(' ')}

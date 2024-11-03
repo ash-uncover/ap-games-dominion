@@ -1,0 +1,30 @@
+.ap-dom-map-unit-order {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  &.ap-dom-map-unit-order--move {
+    transform-origin: 0 50%;
+    opacity: 0.4;
+    position: absolute;
+    display: flex;
+    justify-content: end;
+    align-items: start;
+    & .ap-dom-map-unit-order--move_inner {
+      height: 100%;
+      width: calc(100% - 4rem);
+      background: red;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: -1rem;
+      right: -3rem;
+      border-top : 1.5rem solid transparent;
+      border-bottom : 1.5rem solid transparent;
+      border-left : 3rem solid red;
+    }
+  }
+}

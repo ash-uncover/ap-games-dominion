@@ -13,7 +13,8 @@
   & .ap-dom-game-container_scaler {
     position: absolute;
     top: 1rem;
-    left: 1rem;
+    padding: 0.5rem;
+    margin: auto;
     background: grey;
     color: black;
     border: 1px solid black;

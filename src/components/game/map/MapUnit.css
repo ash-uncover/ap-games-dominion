@@ -1,14 +1,18 @@
 .ap-dom-map-unit {
-  width: 30px;
-  height: 30px;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   border: 2px solid transparent;
 
   &.ap-dom-map-unit--selected {
-    border-color: black;
     scale: 1.05;
     transform-origin: 50% 50%;
     z-index: 1;
-    border: 2px solid gold;
+    &.ap-dom-map-unit--ennemy {
+      border: 0.25rem solid red;
+    }
+    &.ap-dom-map-unit--self {
+      border: 0.25rem solid yellow;
+    }
   }
 }

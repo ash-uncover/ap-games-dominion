@@ -5,11 +5,13 @@ import {
 } from '@reduxjs/toolkit'
 
 import { GameState } from './game.state'
+import { UnitOrder, UnitOrders } from '../../lib/model/game/UnitOrder'
 
 // STATE //
 
 const initialState: GameState = {
   turn: 1,
+  currentPlayer: 'player-0',
   map: {
     width: -1,
     height: -1,
@@ -89,15 +91,26 @@ const start: CaseReducer<GameState, PayloadAction<PayloadStart>> = (state, actio
     }
     state.players[playerId].buildings.push(buildingId)
     state.tiles[tileId].buildings.push(buildingId)
-    const unitId = `unit-${index}`
-    state.units[unitId] = {      
-      id: unitId,
-      name: unitId,
+    const unitId1 = `unit-${index}-1`
+    state.units[unitId1] = {      
+      id: unitId1,
+      name: unitId1,
       owner: playerId,
-      tile: randomTile
+      tile: randomTile,
+      order: { key: UnitOrders.NONE }
     }
-    state.players[playerId].units.push(unitId)
-    state.tiles[tileId].units.push(unitId)
+    state.players[playerId].units.push(unitId1)
+    state.tiles[tileId].units.push(unitId1)
+    const unitId2 = `unit-${index}-2`
+    state.units[unitId2] = {      
+      id: unitId2,
+      name: unitId2,
+      owner: playerId,
+      tile: randomTile,
+      order: { key: UnitOrders.NONE }
+    }
+    state.players[playerId].units.push(unitId2)
+    state.tiles[tileId].units.push(unitId2)
   })
 }
 // #endregion
@@ -143,6 +156,31 @@ const selectUnit: CaseReducer<GameState, PayloadAction<PayloadSelectUnit>> = (st
 }
 // #endregion
 
+// #region Set Unit Order
+interface PayloadSetUnitOrder {
+  id: string
+  key: UnitOrder
+  data?: any
+}
+const setUnitOrder: CaseReducer<GameState, PayloadAction<PayloadSetUnitOrder>> = (state, action) => {
+  const {
+    id,
+    key,
+    data
+  } = action.payload
+  const unit = state.units[id]
+  const tile = state.tiles[unit.tile]
+  if (key === UnitOrders.MOVE && data.x === tile.x && data.y === tile.y) {
+    unit.order = { key: 'NONE' }
+  } else {
+    state.units[id].order = {
+      key,
+      data
+    }
+  }
+}
+// #endregion
+
 // SLICE //
 
 const GameSlice = createSlice({
@@ -154,6 +192,7 @@ const GameSlice = createSlice({
 
     selectTile,
     selectUnit,
+    setUnitOrder,
   },
 })
 

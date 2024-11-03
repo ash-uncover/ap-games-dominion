@@ -29,15 +29,19 @@ export const Panel = ({
       className={classes.join(' ')}
     >
       <header className='ap-dom-panel_header'>
-        {title}
-        {closable ?
-          <button 
-            className='ap-dom-panel_header_action' 
-            onClick={onClose}
-          >
-            close
-          </button>
-        : null}
+        <h4 className='ap-dom-panel_header_title'>
+          {title}
+        </h4>
+        <div className='ap-dom-panel_header_actions' >
+          {closable ?
+            <button 
+              className='ap-dom-panel_header_action' 
+              onClick={onClose}
+            >
+              close
+            </button>
+          : null}
+        </div>
       </header>
       {children}
     </div>

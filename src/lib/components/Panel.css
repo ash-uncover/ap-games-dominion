@@ -9,6 +9,18 @@
     background: rgba(0, 0, 0, 0.65);
     padding: 0.5rem 1rem 0.5rem 1rem;
     margin: 0 -1rem 0.5rem -1rem;
+
+    display: flex;
+    align-items: center;
+
+    & .ap-dom-panel_header_title {
+      width: 0;
+      flex-grow: 1;
+      margin: 0;
+    }
+    & .ap-dom-panel_header_actions {
+      flex-shrink: 0;
+    }
   }
 
 }

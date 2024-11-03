@@ -1,6 +1,9 @@
+import { UnitOrder } from '../../lib/model/game/UnitOrder'
+
 export interface GameState {
   turn: number
   map: GameMap
+  currentPlayer: string
   
   selectedTile: string
   selectedUnits: string[]
@@ -50,4 +53,10 @@ export interface GameUnit {
   name: string
 
   selected?: boolean
+  order: GameUnitOrder | null
+}
+
+export interface GameUnitOrder {
+  key: UnitOrder
+  data?: any
 }

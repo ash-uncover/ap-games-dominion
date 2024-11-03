@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+// Utils
 import GameSelectors from '../../../store/game/game.selectors'
+import GameSlice from '../../../store/game/game.slice'
+import { UnitOrder, UnitOrders } from '../../../lib/model/game/UnitOrder'
+// Components
 import { Panel } from '../../../lib/components/Panel'
-import { UnitPanelUnit } from './UnitPanelUnit'
+// CSS
 import './UnitPanel.css'
 
 interface UnitPanelProperties {}
@@ -11,24 +15,32 @@ export const UnitPanel = ({
 }: UnitPanelProperties) => {
 
   // #region Hooks //
+  const dispatch = useDispatch()
   const [show, setShow] = useState<boolean>(false)
-  
-  const selectedTile = useSelector(GameSelectors.selectedTile)
+  const [actions, setActions] = useState<any[]>([])
+  const currentPlayer = useSelector(GameSelectors.currentPlayer)
   const selectedUnits = useSelector(GameSelectors.selectedUnits)
-  const tile = useSelector(GameSelectors.tile(selectedTile))
+  const unitsSelected = useSelector(GameSelectors.unitsSelected)
 
   useEffect(() => {
-    if (tile && selectedUnits.length) {
-      setShow(tile.units.includes(selectedUnits[0]))
+    if (unitsSelected.length && unitsSelected[0].owner === currentPlayer) {
+      setShow(true)
+      setActions(Object.values(UnitOrders))
     } else {
       setShow(false)
+      setActions([])
     }
-  }, [selectedTile, selectedUnits, tile])
+  }, [unitsSelected, currentPlayer])
   // #endregion
 
   // #region Events
-  function handleClose() {
-    setShow(false)
+  function handleActionClick(key: UnitOrder) {
+    selectedUnits.forEach(id => {
+      dispatch(GameSlice.actions.setUnitOrder({
+        id, 
+        key
+      }))
+    })
   }
   // #endregion
 
@@ -41,15 +53,35 @@ export const UnitPanel = ({
   return (
     <Panel
       className={classes.join(' ')}
-      closable
-      title={'Units'}
-      onClose={handleClose}
+      title={'Actions'}      
     >
-      <ul>
-        {tile.units.map(unit => {
-          return <UnitPanelUnit key={unit} id={unit} />
-        })}
-      </ul>
+      {actions.map(
+        (action: UnitOrder) => {
+          const classesAction = ['ap-dom-unit-panel_action']
+          const state = unitsSelected.reduce((acc, unit) => {
+            if (unit.order?.key === action) {
+              acc.some = true
+            } else {
+              acc.all = false
+            }
+            return acc
+          }, { some: false, all: true })
+          if (state.all) {
+            classesAction.push('ap-dom-unit-panel_action--all')
+          } else if (state.some) {
+            classesAction.push('ap-dom-unit-panel_action--some')
+          }
+          return (
+            <button 
+              key={action} 
+              className={classesAction.join(' ')}
+              onClick={() => handleActionClick(action)}
+            >
+              {action}
+            </button>
+          )
+        }
+      )}
     </Panel>
   )
   // #endregion

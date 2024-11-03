@@ -1,8 +1,11 @@
 .ap-dom-map-tile {
-  width: 150px;
-  height: 150px;
+  position: absolute;
   
-  display: inline-block;
+  width: var(--map-tile-size);
+  height: var(--map-tile-size);
+  
+  display: inline-flex;
+  flex-direction: column;
   cursor: pointer;
   
   background: lightgrey;
@@ -19,5 +22,19 @@
     scale: 1.05;
     transform-origin: 50% 50%;
     z-index: 1;
+  }
+
+  & .ap-dom-map-tile_buildings {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  & .ap-dom-map-tile_units {
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

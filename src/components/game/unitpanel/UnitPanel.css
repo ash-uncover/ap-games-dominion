@@ -1,7 +1,16 @@
 .ap-dom-unit-panel {
   position: absolute;
-  top: 1rem;
   bottom: 1rem;
-  right: 1rem;
-  width: 300px;
+  left: 20rem;
+  right: 20rem;
+  height: 6rem;
+
+  & .ap-dom-unit-panel_action {
+    &.ap-dom-unit-panel_action--all {
+      background-color: aqua;
+    }
+    &.ap-dom-unit-panel_action--some {
+      background-color: beige;
+    }
+  }
 }
