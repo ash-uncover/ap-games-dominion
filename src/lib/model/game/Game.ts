@@ -1,0 +1,7 @@
+interface Game {
+
+}
+
+interface Game {
+  
+}

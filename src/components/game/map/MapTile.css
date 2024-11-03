@@ -1,0 +1,23 @@
+.ap-dom-map-tile {
+  width: 150px;
+  height: 150px;
+  
+  display: inline-block;
+  cursor: pointer;
+  
+  background: lightgrey;
+  box-sizing: border-box;
+  border: 2px solid grey;
+  transition: scale 0.045s;
+
+  &:hover {
+    background: grey;
+  }
+  
+  &.ap-dom-map-tile--selected {
+    border-color: black;
+    scale: 1.05;
+    transform-origin: 50% 50%;
+    z-index: 1;
+  }
+}

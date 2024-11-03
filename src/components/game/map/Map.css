@@ -1,0 +1,9 @@
+.ap-dom-map {
+  .ap-dom-map_row {
+    height: 150px;
+
+    &.ap-dom-map_row--even {
+      margin-left: 75px;
+    }
+  }
+}

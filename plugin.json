@@ -1,0 +1,21 @@
+{
+  "name": "dominion",
+  "url": "http://localhost:8089",
+  "provides": {
+    "ap-games/game": {
+      "life": {
+        "attributes": {
+          "name": "Dominions",
+          "description": "Master 4X",
+          "thumbnail": "/images/thumbnail.jpg"
+        },
+        "elements": {
+          "main": {
+            "url": "",
+            "type": "iframe"
+          }
+        }
+      }
+    }
+  }
+}

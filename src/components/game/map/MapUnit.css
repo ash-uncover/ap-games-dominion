@@ -1,0 +1,14 @@
+.ap-dom-map-unit {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+
+  &.ap-dom-map-unit--selected {
+    border-color: black;
+    scale: 1.05;
+    transform-origin: 50% 50%;
+    z-index: 1;
+    border: 2px solid gold;
+  }
+}

@@ -1,0 +1,32 @@
+.ap-dom-game-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;  
+
+  &.ap-dom-game-container--moving {
+    cursor: move;
+  }
+
+  & .ap-dom-game-container_scaler {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: grey;
+    color: black;
+    border: 1px solid black;
+    z-index: 1;
+  }
+
+  & .ap-dom-game-container_content {
+    transition: scale 0.075s;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    &.ap-dom-game-container_content--moving {
+      pointer-events: none;
+    }
+  }
+}
