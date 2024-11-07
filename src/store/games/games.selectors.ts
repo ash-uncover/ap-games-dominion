@@ -6,9 +6,7 @@ import { DataState } from '@uncover/js-utils'
 export const base = (state: RootState) => state.games
 
 export const games = (state: RootState): Record<string, GameInfo> => base(state).games
-export const gameIds = createSelector([games], (games) =>
-  Object.keys(games)
-)
+export const gameIds = createSelector([games], (games) => Object.keys(games))
 export const game = (id: string) => (state: RootState): GameInfo => games(state)[id]
 
 export const getGamesState = (state: RootState): DataState => base(state).getGamesState

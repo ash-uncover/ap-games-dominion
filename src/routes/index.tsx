@@ -28,9 +28,7 @@ export const RouteRoot = () => {
           <Route path='games/:gameId' element={<GamePlayerSelector service={GameLocalService} />} />
           <Route index element={<General />} />
         </Route>
-        <Route path='games/:gameId'>
-          <Route path='player/:playerId' element={<Game />} />
-        </Route>
+        <Route path='games/:gameId/player/:playerId' element={<Game />} />
       </Route>
     </Routes>
   )
