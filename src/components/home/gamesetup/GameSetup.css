@@ -1,0 +1,5 @@
+.ap-dom-game-setup {
+  & .error {
+    color: red;
+  }
+}

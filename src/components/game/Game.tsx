@@ -5,6 +5,7 @@ import GameSlice from '../../store/game/game.slice'
 import GameSelectors from '../../store/game/game.selectors'
 // Components
 import { GameContainer } from './GameContainer'
+import { GameHeader } from './GameHeader'
 import { Map } from './map/Map'
 import { TilePanel } from './tilepanel/TilePanel'
 import { UnitPanel } from './unitpanel/UnitPanel'
@@ -36,9 +37,7 @@ export const Game = ({
   // #region Rendering
   return (
     <div className='ap-dom-game'>
-      <header className='ap-dom-game_header'>
-        {`Turn n°${turn} - ${player?.name}`}
-      </header>
+      <GameHeader />
       <main className='ap-dom-game_main'>
         <GameContainer>
           <Map />

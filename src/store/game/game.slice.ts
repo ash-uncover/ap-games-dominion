@@ -181,6 +181,12 @@ const setUnitOrder: CaseReducer<GameState, PayloadAction<PayloadSetUnitOrder>> =
 }
 // #endregion
 
+// #region End Turn
+const endTurn: CaseReducer<GameState, PayloadAction<void>> = (state, action) => {
+
+}
+// #endregion
+
 // SLICE //
 
 const GameSlice = createSlice({
@@ -193,6 +199,8 @@ const GameSlice = createSlice({
     selectTile,
     selectUnit,
     setUnitOrder,
+
+    endTurn,
   },
 })
 

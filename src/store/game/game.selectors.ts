@@ -42,6 +42,7 @@ const GameSelectors = {
   
   building,
   
+  players,
   player,
   playerCurrent,
   

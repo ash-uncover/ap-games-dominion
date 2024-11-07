@@ -1,30 +1,22 @@
-import React, { ReactElement } from 'react'
-import { useLocation } from 'react-router-dom'
-import { Game } from './game/Game'
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+// CSS
 import './App.css'
 
-interface AppProperties {
-  children?: ReactElement
-}
+interface AppProperties {}
 
 export const App = ({
-  children
 }: AppProperties) => {
 
-  // #region Hooks //
-  const query = useQuery()
+  // #region Hooks
   // #endregion
 
-  // Rendering //
+  // #region Rendering
   return (
     <div className='ap-dom-app'>
-      <Game />
+      <Outlet />
+      <div className='ap-dom-app_credits'>@aSHuncover 2024</div>
     </div>
   )
   // #endregion
-}
-
-const useQuery = () => {
-  const { search } = useLocation()
-  return React.useMemo(() => new URLSearchParams(search), [search])
 }
