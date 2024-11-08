@@ -8,3 +8,12 @@ export function resolveNextName(names: string[], prefix: string) {
   }
   return `${prefix} (${i})`
 }
+export function nameToId(name: string) {
+  if (name) {
+    return name
+      .trim()
+      .toLowerCase()
+      .split(' ').filter(s => s).join('_')
+  }
+  return ''
+}

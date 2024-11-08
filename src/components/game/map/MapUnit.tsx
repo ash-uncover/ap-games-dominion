@@ -16,7 +16,7 @@ export const MapUnit = ({
   // #region Hooks //
   const dispatch = useDispatch()
   const unit = useSelector(GameSelectors.unit(id))
-  const player = useSelector(GameSelectors.player(unit.owner))
+  const player = useSelector(GameSelectors.player(unit.player))
   const currentPlayer = useSelector(GameSelectors.currentPlayer)
   // #endregion
 
@@ -33,7 +33,7 @@ export const MapUnit = ({
   if (unit.selected) {
     classes.push('ap-dom-map-unit--selected')
   }
-  if (currentPlayer === unit.owner) {
+  if (currentPlayer === unit.player) {
     classes.push('ap-dom-map-unit--self')
   } else {
     classes.push('ap-dom-map-unit--ennemy')

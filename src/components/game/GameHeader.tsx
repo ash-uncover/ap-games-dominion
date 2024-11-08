@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // Stores
 import GameSlice from '../../store/game/game.slice'
 import GameSelectors from '../../store/game/game.selectors'
-import { UnitOrders } from '../../lib/model/game/UnitOrder'
+import { UnitOrders } from '../../lib/model/constants/UnitOrder'
 // CSS
 import './GameHeader.css'
 

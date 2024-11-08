@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { RootState } from '../state'
-import { GameInfo } from './games.state'
 import { DataState } from '@uncover/js-utils'
+import { RootState } from '../state'
+import { GameInfo } from '../../lib/model/game/GameInfo'
 
 export const base = (state: RootState) => state.games
 

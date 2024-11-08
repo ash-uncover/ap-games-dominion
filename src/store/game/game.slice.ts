@@ -3,15 +3,21 @@ import {
   createSlice,
   PayloadAction
 } from '@reduxjs/toolkit'
+import { DataStates } from '@uncover/js-utils'
 
-import { GameState } from './game.state'
-import { UnitOrder, UnitOrders } from '../../lib/model/game/UnitOrder'
+import { GameData, GameDataBuilding, GameDataPlayer, GameDataUnit } from '../../lib/model/game/GameData'
+import { UnitOrder, UnitOrders } from '../../lib/model/constants/UnitOrder'
+
+import { GameBuilding, GamePlayer, GameState, GameUnit } from './game.state'
+import { building } from './game.selectors'
 
 // STATE //
 
 const initialState: GameState = {
-  turn: 1,
-  currentPlayer: 'player-0',
+  id: '',
+  name: '',
+  turn: -1,
+  player: '',
   map: {
     width: -1,
     height: -1,
@@ -23,96 +29,184 @@ const initialState: GameState = {
   players: {},
   tiles: {},
   units: {},
+
+  getGameTurnState: DataStates.NEVER,
+  getGameTurnError: null,
+
+  putGameTurnState: DataStates.NEVER,
+  putGameTurnError: null,
 }
 
 // REDUCERS //
 
-// #region Start
-interface PayloadStart {
-  map: {
-    width: number
-    height: number
-  },
-  players: {
-    name: string
-    nation: string
-  }[]
+// #region Get Game Turn
+
+/*
+ * Game turn retrieval reducers 
+ */
+
+// #region > Request
+interface PayloadGetGameTurnRequest {
+  gameId: string
+  playerId: string
 }
-const start: CaseReducer<GameState, PayloadAction<PayloadStart>> = (state, action) => {
+const getGameTurnRequest: CaseReducer<GameState, PayloadAction<PayloadGetGameTurnRequest>> = (state, action) => {
   const {
-    map,
-    players,
+    gameId,
+    playerId
   } = action.payload
-  // Setup Map
-  state.map = {
-    width: map.width,
-    height: map.height,
-    tiles: []
-  }
-  state.tiles = {}
-  for (let x = 0 ; x < map.width ; x++) {
-    const row = []
-    for (let y = 0 ; y < map.height ; y++) {
-      const tileId = `tile-${x}-${y}`
-      const tile = {
-        id: `tile-${x}-${y}`,
-        x,
-        y,
-        buildings: [],
-        units: [],
-      }
-      row.push(tileId)
-      state.tiles[tileId] = tile
-    }
-    state.map.tiles.push(row)
-  }
-  // Setup Players
-  state.players = {}
-  state.buildings = {}
-  players.forEach((player, index) => {
-    const playerId = `player-${index}`
-    state.players[playerId] = {
-      id: playerId,
-      name: player.name,
-      nation: player.nation,
-      buildings: [],
-      units: [],
-    }
-    const randomWidth =  Math.floor(Math.random() * map.width)
-    const randomHeight =  Math.floor(Math.random() * map.height)
-    const randomTile = state.map.tiles[randomHeight][randomWidth]
-    const buildingId = `building-${index}`
-    const tileId = state.map.tiles[randomHeight][randomWidth]
-    state.buildings[buildingId] = {      
-      id: buildingId,
-      name: buildingId,
-      owner: playerId,
-      tile: randomTile
-    }
-    state.players[playerId].buildings.push(buildingId)
-    state.tiles[tileId].buildings.push(buildingId)
-    const unitId1 = `unit-${index}-1`
-    state.units[unitId1] = {      
-      id: unitId1,
-      name: unitId1,
-      owner: playerId,
-      tile: randomTile,
-      order: { key: UnitOrders.NONE }
-    }
-    state.players[playerId].units.push(unitId1)
-    state.tiles[tileId].units.push(unitId1)
-    const unitId2 = `unit-${index}-2`
-    state.units[unitId2] = {      
-      id: unitId2,
-      name: unitId2,
-      owner: playerId,
-      tile: randomTile,
-      order: { key: UnitOrders.NONE }
-    }
-    state.players[playerId].units.push(unitId2)
-    state.tiles[tileId].units.push(unitId2)
-  })
+  state.getGameTurnState = DataStates.FETCHING
+  state.getGameTurnError = null
 }
+// #endregion
+
+// #region > Success
+interface PayloadGetGameTurnSuccess {
+  gameId: string
+  playerId: string
+  gameData: GameData
+}
+const getGameTurnSuccess: CaseReducer<GameState, PayloadAction<PayloadGetGameTurnSuccess>> = (state, action) => {
+  const {
+    gameId,
+    playerId,
+    gameData
+  } = action.payload
+  // Request Info
+  state.getGameTurnState = DataStates.SUCCESS
+  state.getGameTurnError = null
+  // Interaction Info
+  state.selectedTile = null
+  state.selectedUnits = []
+  // Basic Info
+  state.id = gameData.id
+  state.name = gameData.name
+  state.turn = gameData.turn
+  state.player = playerId
+  // Map Info
+  state.tiles = {}
+  state.map = {
+    width: gameData.setup.map.width,
+    height: gameData.setup.map.height,
+    tiles: gameData.map.tiles.map(
+      tiles => tiles.map(
+        tile => {
+          state.tiles[tile.id] = {
+            ...tile,
+            buildings: [],
+            units: []
+          }
+          return tile.id
+        }
+      )
+    )
+  }
+  // Players Info
+  state.players = gameData.players.reduce((acc: Record<string, GamePlayer>, playerData: GameDataPlayer) => {
+    const player = {
+      id: playerData.id,
+      name: playerData.name,
+      nation: playerData.nation,
+      buildings: [],
+      units: []
+    }
+    acc[playerData.id] = player
+    return acc
+  }, {})
+  // Buildings Info
+  state.buildings = gameData.buildings.reduce((acc: Record<string, GameBuilding>, buildingData: GameDataBuilding) => {
+    state.tiles[buildingData.tile].buildings.push(buildingData.id)
+    state.players[buildingData.player].buildings.push(buildingData.id)
+    const building: GameBuilding = {
+      id: buildingData.id,
+      player: buildingData.player,
+      tile: buildingData.tile,
+      name: buildingData.name,
+    }
+    acc[buildingData.id] = building
+    return acc
+  }, {})
+  // Units Info
+  state.units = gameData.units.reduce((acc: Record<string, GameUnit>, unitData: GameDataUnit) => {
+    state.tiles[unitData.tile].units.push(unitData.id)
+    state.players[unitData.player].units.push(unitData.id)
+    const unit = {
+      id: unitData.id,
+      player: unitData.player,
+      tile: unitData.tile,
+      name: unitData.name,
+      order: unitData.order,
+    }
+    acc[unitData.id] = unit
+    return acc
+  }, {})
+}
+// #endregion
+
+// #region > Failure
+interface PayloadGetGameTurnFailure {
+  error: string
+}
+const getGameTurnFailure: CaseReducer<GameState, PayloadAction<PayloadGetGameTurnFailure>> = (state, action) => {
+  const {
+    error,
+  } = action.payload
+  state.getGameTurnState = DataStates.FAILURE
+  state.getGameTurnError = error
+}
+// #endregion
+
+// #endregion
+
+// #region Put Game Turn
+
+/*
+ * Game turn update reducers 
+ */
+
+// #region > Request
+interface PayloadPutGameTurnRequest {
+  gameId: string
+  playerId: string
+}
+const putGameTurnRequest: CaseReducer<GameState, PayloadAction<PayloadPutGameTurnRequest>> = (state, action) => {
+  const {
+    gameId,
+    playerId
+  } = action.payload
+  state.putGameTurnState = DataStates.FETCHING
+  state.putGameTurnError = null
+}
+// #endregion
+
+// #region > Success
+interface PayloadPutGameTurnSuccess {
+  gameId: string
+  playerId: string
+}
+const putGameTurnSuccess: CaseReducer<GameState, PayloadAction<PayloadPutGameTurnSuccess>> = (state, action) => {
+  const {
+    gameId,
+    playerId
+  } = action.payload
+  state.putGameTurnState = DataStates.SUCCESS
+  state.putGameTurnError = null
+}
+// #endregion
+
+// #region > Failure
+interface PayloadPutGameTurnFailure {
+  error: string
+}
+const putGameTurnFailure: CaseReducer<GameState, PayloadAction<PayloadPutGameTurnFailure>> = (state, action) => {
+  const {
+    error,
+  } = action.payload
+  state.putGameTurnState = DataStates.FAILURE
+  state.putGameTurnError = error
+}
+// #endregion
+
 // #endregion
 
 // #region Select Tile
@@ -194,7 +288,13 @@ const GameSlice = createSlice({
   initialState,
 
   reducers: {
-    start,
+    getGameTurnRequest,
+    getGameTurnSuccess,
+    getGameTurnFailure,
+    
+    putGameTurnRequest,
+    putGameTurnSuccess,
+    putGameTurnFailure,
 
     selectTile,
     selectUnit,

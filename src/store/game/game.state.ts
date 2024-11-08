@@ -1,9 +1,12 @@
-import { UnitOrder } from '../../lib/model/game/UnitOrder'
+import { DataState } from '@uncover/js-utils'
+import { UnitOrder } from '../../lib/model/constants/UnitOrder'
 
 export interface GameState {
+  id: string
+  name: string
   turn: number
+  player: string
   map: GameMap
-  currentPlayer: string
   
   selectedTile: string
   selectedUnits: string[]
@@ -12,6 +15,12 @@ export interface GameState {
   players: Record<string, GamePlayer>
   buildings: Record<string, GameBuilding>
   units: Record<string, GameUnit>
+
+  getGameTurnState: DataState
+  getGameTurnError: string
+
+  putGameTurnState: DataState
+  putGameTurnError: string
 }
 
 export interface GameMap {
@@ -41,14 +50,14 @@ export interface GamePlayer {
 
 export interface GameBuilding {
   id: string
-  owner: string
+  player: string
   tile: string
   name: string
 }
 
 export interface GameUnit {
   id: string
-  owner: string
+  player: string
   tile: string
   name: string
 

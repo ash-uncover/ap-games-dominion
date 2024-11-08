@@ -4,7 +4,7 @@ import { RootState } from '../state'
 export const base = (state: RootState) => state.game
 
 export const turn = (state: RootState) => base(state).turn
-export const currentPlayer = (state: RootState) => base(state).currentPlayer
+export const currentPlayer = (state: RootState) => base(state).player
 
 export const map = (state: RootState) => base(state).map
 export const selectedTile = (state: RootState) => base(state).selectedTile
@@ -29,7 +29,7 @@ export const unitsSelected = createSelector([selectedUnits, units], (selectedUni
   selectedUnits.map(unit => units[unit])
 )
 export const unitsCurrent = createSelector([currentPlayer, units], (currentPlayer, units) =>
-  Object.values(units).filter(unit => unit.owner === currentPlayer)
+  Object.values(units).filter(unit => unit.player === currentPlayer)
 )
 
 const GameSelectors = {

@@ -4,8 +4,9 @@ import {
   PayloadAction
 } from '@reduxjs/toolkit'
 
-import { GameInfo, GamesState } from './games.state'
+import { GamesState } from './games.state'
 import { DataStates } from '@uncover/js-utils'
+import { GameInfo } from '../../lib/model/game/GameInfo'
 
 // STATE //
 
@@ -42,10 +43,12 @@ interface PayloadGetGamesSuccess {
 }
 const getGamesSuccess: CaseReducer<GamesState, PayloadAction<PayloadGetGamesSuccess>> = (state, action) => {
   const { games } = action.payload
+  state.games = games.reduce((acc, game) => {
+    acc[game.id] = game
+    return acc
+  }, {})
   state.getGamesState = DataStates.SUCCESS
   state.getGamesError = null
-  state.games = {}
-  games.forEach((game) => state.games[game.id] = game)
 }
 // #endregion
 
@@ -73,14 +76,9 @@ const postGameRequest: CaseReducer<GamesState, PayloadAction<void>> = (state) =>
 // #endregion
 
 // #region > Success
-interface PayloadPostGameSuccess {
-  game: GameInfo
-}
-const postGameSuccess: CaseReducer<GamesState, PayloadAction<PayloadPostGameSuccess>> = (state, action) => {
-  const { game } = action.payload
+const postGameSuccess: CaseReducer<GamesState, PayloadAction<void>> = (state, action) => {
   state.postGameState = DataStates.SUCCESS
   state.postGameError = null
-  state.games[game.id] = game
 }
 // #endregion
 

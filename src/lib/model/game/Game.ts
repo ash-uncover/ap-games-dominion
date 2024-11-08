@@ -1,7 +1,0 @@
-interface Game {
-
-}
-
-interface Game {
-  
-}

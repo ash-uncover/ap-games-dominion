@@ -20,18 +20,9 @@ export const Game = ({
 }: GameProperties) => {
 
   // #region Hooks
-  const dispatch = useDispatch()
-  const turn = useSelector(GameSelectors.turn)
-  const player = useSelector(GameSelectors.playerCurrent)
-  useEffect(() => {
-    dispatch(GameSlice.actions.start({ 
-      map: { width: 10, height: 10 },
-      players: [
-        { name: 'aSH', nation: 'N1' },
-        { name: 'Ji', nation: 'N2' }
-      ]
-    }))
-  }, [])
+  // #endregion
+
+  // #region Events
   // #endregion
 
   // #region Rendering

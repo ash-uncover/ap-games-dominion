@@ -2,20 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 // Utils
-import { resolveNextName } from '../../../lib/utils/names'
+import { nameToId, resolveNextName } from '../../../lib/utils/names'
+import { GameStatuses } from '../../../lib/model/constants/GameStatus'
+import { PlayerTypes } from '../../../lib/model/constants/PlayerType'
+import { PlayerLevels } from '../../../lib/model/constants/PlayerLevel'
+import { GameInfo, GameInfoPlayer } from '../../../lib/model/game/GameInfo'
+import { GameService, createGame, loadGames } from '../../../service/GameService'
 import GamesSelectors from '../../../store/games/games.selectors'
-import { GameService, createGame } from '../../../service/games/GameService'
-import { GameInfoStates } from '../../../store/games/games.state'
 import { GameSetupPlayer } from './GameSetupPlayer'
 // CSS
 import './GameSetup.css'
 
 interface GameSetupProperties {
   service: GameService
-}
-export interface PlayerSetupDefinition {
-  name: string
-  nation: string | null
 }
 export const GameSetup = ({
   service
@@ -30,9 +29,9 @@ export const GameSetup = ({
   const [widthError, setWidthError] = useState('')
   const [height, setHeight] = useState(10)
   const [heightError, setHeightError] = useState('')
-  const [players, setPlayers] = useState<PlayerSetupDefinition[]>([
-    { name: 'Player (1)', nation: '' },
-    { name: 'Player (2)', nation: '' }
+  const [players, setPlayers] = useState<GameInfoPlayer[]>([
+    { name: 'Player (1)', nation: '', type: PlayerTypes.HUMAN, level: PlayerLevels.NORMAL },
+    { name: 'Player (2)', nation: '', type: PlayerTypes.HUMAN, level: PlayerLevels.NORMAL }
   ]);
   const [playersError, setPlayersError] = useState('')
   const [disabled, setDisabled] = useState(true)
@@ -85,7 +84,7 @@ export const GameSetup = ({
   function handleHeightChange(event: React.ChangeEvent<HTMLInputElement>) {
     setHeight(Number(event.target.value))
   }
-  function handlePlayerChange(playerName: string, playerChange: PlayerSetupDefinition) {
+  function handlePlayerChange(playerName: string, playerChange: GameInfoPlayer) {
     setPlayers(players => players.map(player => {
       if (player.name !== playerName) {
         return player
@@ -100,7 +99,9 @@ export const GameSetup = ({
     setPlayers(players => {
       return players.concat({
         name: resolveNextName(players.map(p => p.name), 'Player'),
-        nation: null
+        nation: null,
+        type: PlayerTypes.AI, 
+        level: PlayerLevels.NORMAL 
       })
     })
   }
@@ -108,24 +109,22 @@ export const GameSetup = ({
     navigate('/games')
   }
   function handleStartClick() {
-    const game = {
-      id: name.toLowerCase().split(' ').join('_'),
+    const game: GameInfo = {
+      id: nameToId(name),
       name,
       password,
-      state: GameInfoStates.STARTED,
+      status: GameStatuses.STARTED,
       setup: {
         map: {
           width,
           height
         }
       },
-      players: players.reduce((acc, player) => {
-        acc[player.name] = player
-        return acc
-      }, {})
+      players
     }
     createGame(service, dispatch, game)
-      .then(() => navigate('/games'))
+      .then(() => loadGames(service, dispatch))
+      .then(() => navigate(`/games/${game.id}`))
   }
   // #endregion
 
@@ -165,6 +164,8 @@ export const GameSetup = ({
           key={`player-${index}`}
           name={player.name}
           nation={player.nation}
+          type={player.type}
+          level={player.level}
           onChange={(playerChange) => handlePlayerChange(player.name, playerChange)}
           onDelete={() => handlePlayerDelete(player.name)}
         />

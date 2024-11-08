@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // Utils
 import { DataStates } from '@uncover/js-utils'
 import GamesSelectors from '../../../store/games/games.selectors'
-import { GameService, loadGames, deleteGame } from '../../../service/games/GameService'
+import { GameService, loadGames, deleteGame } from '../../../service/GameService'
 // CSS
 import './Games.css'
 

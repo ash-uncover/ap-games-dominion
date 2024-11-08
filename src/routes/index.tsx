@@ -14,7 +14,7 @@ import { GamePlayerSelector } from '../components/home/gameplayerselector/GamePl
 import { GameSetup } from '../components/home/gamesetup/GameSetup'
 import { General } from '../components/home/general/General'
 
-import { GameLocalService } from '../service/games/GameLocalService'
+import { GameLocalService } from '../service/GameLocalService'
 
 export const RouteRoot = () => {
 

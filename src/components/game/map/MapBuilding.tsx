@@ -16,7 +16,7 @@ export const MapBuilding = ({
 
   // #region Hooks
   const building = useSelector(GameSelectors.building(id))
-  const player = useSelector(GameSelectors.player(building.owner))
+  const player = useSelector(GameSelectors.player(building.player))
   // #endregion
 
 

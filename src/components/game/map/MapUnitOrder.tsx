@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // Utils
 import GameSelectors from '../../../store/game/game.selectors'
-import { UnitOrders } from '../../../lib/model/game/UnitOrder'
+import { UnitOrders } from '../../../lib/model/constants/UnitOrder'
 import { angle, distance, tile2point } from '../../../lib/utils/geometry'
 // CSS
 import './MapUnitOrder.css'
