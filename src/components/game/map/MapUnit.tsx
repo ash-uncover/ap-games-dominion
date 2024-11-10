@@ -17,7 +17,7 @@ export const MapUnit = ({
   const dispatch = useDispatch()
   const unit = useSelector(GameSelectors.unit(id))
   const player = useSelector(GameSelectors.player(unit.player))
-  const currentPlayer = useSelector(GameSelectors.currentPlayer)
+  const currentPlayer = useSelector(GameSelectors.playerId)
   // #endregion
 
   // #region Events

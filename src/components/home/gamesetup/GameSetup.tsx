@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 // Utils
 import { nameToId, resolveNextName } from '../../../lib/utils/names'
-import { GameStatuses } from '../../../lib/model/constants/GameStatus'
-import { PlayerTypes } from '../../../lib/model/constants/PlayerType'
-import { PlayerLevels } from '../../../lib/model/constants/PlayerLevel'
-import { GameInfo, GameInfoPlayer } from '../../../lib/model/game/GameInfo'
-import { GameService, createGame, loadGames } from '../../../service/GameService'
+import { GameStatus } from '../../../lib/model/constants/GameStatus'
+import { PlayerType } from '../../../lib/model/constants/PlayerType'
+import { PlayerLevel } from '../../../lib/model/constants/PlayerLevel'
+import { GameService } from '../../../service/GameService'
+import { postGame, getGames } from '../../../service/GameServiceHelper'
 import GamesSelectors from '../../../store/games/games.selectors'
 import { GameSetupPlayer } from './GameSetupPlayer'
+import { PayloadGameInfoPut, PayloadGameInfoPutPlayer } from '../../../lib/model/payload/PayloadGameInfoPut'
 // CSS
 import './GameSetup.css'
 
@@ -29,9 +30,9 @@ export const GameSetup = ({
   const [widthError, setWidthError] = useState('')
   const [height, setHeight] = useState(10)
   const [heightError, setHeightError] = useState('')
-  const [players, setPlayers] = useState<GameInfoPlayer[]>([
-    { name: 'Player (1)', nation: '', type: PlayerTypes.HUMAN, level: PlayerLevels.NORMAL },
-    { name: 'Player (2)', nation: '', type: PlayerTypes.HUMAN, level: PlayerLevels.NORMAL }
+  const [players, setPlayers] = useState<PayloadGameInfoPutPlayer[]>([
+    { name: 'Player (1)', nation: 'N1', type: PlayerType.HUMAN, level: PlayerLevel.NORMAL },
+    { name: 'Player (2)', nation: 'N2', type: PlayerType.HUMAN, level: PlayerLevel.NORMAL }
   ]);
   const [playersError, setPlayersError] = useState('')
   const [disabled, setDisabled] = useState(true)
@@ -84,7 +85,7 @@ export const GameSetup = ({
   function handleHeightChange(event: React.ChangeEvent<HTMLInputElement>) {
     setHeight(Number(event.target.value))
   }
-  function handlePlayerChange(playerName: string, playerChange: GameInfoPlayer) {
+  function handlePlayerChange(playerName: string, playerChange: PayloadGameInfoPutPlayer) {
     setPlayers(players => players.map(player => {
       if (player.name !== playerName) {
         return player
@@ -100,8 +101,8 @@ export const GameSetup = ({
       return players.concat({
         name: resolveNextName(players.map(p => p.name), 'Player'),
         nation: null,
-        type: PlayerTypes.AI, 
-        level: PlayerLevels.NORMAL 
+        type: PlayerType.AI, 
+        level: PlayerLevel.NORMAL 
       })
     })
   }
@@ -109,11 +110,11 @@ export const GameSetup = ({
     navigate('/games')
   }
   function handleStartClick() {
-    const game: GameInfo = {
+    const game: PayloadGameInfoPut = {
       id: nameToId(name),
       name,
       password,
-      status: GameStatuses.STARTED,
+      status: GameStatus.STARTED,
       setup: {
         map: {
           width,
@@ -122,8 +123,8 @@ export const GameSetup = ({
       },
       players
     }
-    createGame(service, dispatch, game)
-      .then(() => loadGames(service, dispatch))
+    postGame(service, dispatch, game)
+      .then(() => getGames(service, dispatch))
       .then(() => navigate(`/games/${game.id}`))
   }
   // #endregion

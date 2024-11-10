@@ -10,7 +10,7 @@ import { App } from '../components/App'
 import { Home } from '../components/home/Home'
 import { Game } from '../components/game/Game'
 import { Games } from '../components/home/games/Games'
-import { GamePlayerSelector } from '../components/home/gameplayerselector/GamePlayerSelector'
+import { GameLobby } from '../components/home/gamelobby/GameLobby'
 import { GameSetup } from '../components/home/gamesetup/GameSetup'
 import { General } from '../components/home/general/General'
 
@@ -25,10 +25,10 @@ export const RouteRoot = () => {
         <Route path='' element={<Home />} >
           <Route path='games' element={<Games service={GameLocalService}/>} />
           <Route path='games/new' element={<GameSetup service={GameLocalService} />} />
-          <Route path='games/:gameId' element={<GamePlayerSelector service={GameLocalService} />} />
+          <Route path='games/:gameId' element={<GameLobby service={GameLocalService} />} />
           <Route index element={<General />} />
         </Route>
-        <Route path='games/:gameId/player/:playerId' element={<Game />} />
+        <Route path='games/:gameId/player/:playerId' element={<Game service={GameLocalService} />} />
       </Route>
     </Routes>
   )

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // Utils
 import GameSelectors from '../../../store/game/game.selectors'
 import GameSlice from '../../../store/game/game.slice'
+import { UnitOrder } from '../../../lib/model/constants/UnitOrder'
 // Components
 import { MapBuilding } from './MapBuilding'
 import { MapUnit } from './MapUnit'
@@ -38,7 +39,7 @@ export const MapTile = ({
     selectedUnits.forEach(id => {
       dispatch(GameSlice.actions.setUnitOrder({
         id, 
-        key: 'MOVE',
+        key: UnitOrder.MOVE,
         data: {
           x: tile.x,
           y: tile.y,

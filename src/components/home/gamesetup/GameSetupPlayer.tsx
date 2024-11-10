@@ -1,7 +1,7 @@
 import React from 'react'
-import { GameInfoPlayer } from '../../../lib/model/game/GameInfo'
 import { PlayerType } from '../../../lib/model/constants/PlayerType'
 import { PlayerLevel } from '../../../lib/model/constants/PlayerLevel'
+import { PayloadGameInfoPutPlayer } from '../../../lib/model/payload/PayloadGameInfoPut'
 // CSS
 import './GameSetupPlayer.css'
 
@@ -10,7 +10,7 @@ interface GameSetupPlayerProperties {
   nation: string
   type: PlayerType
   level: PlayerLevel
-  onChange: (player: GameInfoPlayer) => void
+  onChange: (player: PayloadGameInfoPutPlayer) => void
   onDelete: () => void
 }
 

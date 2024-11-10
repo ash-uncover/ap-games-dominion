@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // Utils
 import GameSelectors from '../../../store/game/game.selectors'
 import GameSlice from '../../../store/game/game.slice'
-import { UnitOrder, UnitOrders } from '../../../lib/model/constants/UnitOrder'
+import { UnitOrder } from '../../../lib/model/constants/UnitOrder'
 // Components
 import { Panel } from '../../../lib/components/Panel'
 // CSS
@@ -17,15 +17,15 @@ export const UnitPanel = ({
   // #region Hooks
   const dispatch = useDispatch()
   const [show, setShow] = useState<boolean>(false)
-  const [actions, setActions] = useState<any[]>([])
-  const currentPlayer = useSelector(GameSelectors.currentPlayer)
+  const [actions, setActions] = useState<UnitOrder[]>([])
+  const currentPlayer = useSelector(GameSelectors.playerId)
   const selectedUnits = useSelector(GameSelectors.selectedUnits)
   const unitsSelected = useSelector(GameSelectors.unitsSelected)
 
   useEffect(() => {
     if (unitsSelected.length && unitsSelected[0].player === currentPlayer) {
       setShow(true)
-      setActions(Object.values(UnitOrders))
+      setActions(Object.values(UnitOrder))
     } else {
       setShow(false)
       setActions([])

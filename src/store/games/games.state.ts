@@ -1,8 +1,8 @@
 import { DataState } from '@uncover/js-utils'
-import { GameInfo } from '../../lib/model/game/GameInfo'
+import { PayloadGameInfoGet } from '../../lib/model/payload/PayloadGameInfoGet'
 
 export interface GamesState {
-  games: Record<string, GameInfo>
+  games: Record<string, PayloadGameInfoGet>
   
   getGamesState: DataState
   getGamesError: string | null
@@ -12,4 +12,7 @@ export interface GamesState {
 
   deleteGameState: DataState
   deleteGameError: string | null
+
+  postTurnState: DataState
+  postTurnError: string | null
 }

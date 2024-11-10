@@ -6,12 +6,13 @@ import {
 
 import { GamesState } from './games.state'
 import { DataStates } from '@uncover/js-utils'
-import { GameInfo } from '../../lib/model/game/GameInfo'
+import { PayloadGameInfoGet } from '../../lib/model/payload/PayloadGameInfoGet'
 
 // STATE //
 
 const initialState: GamesState = {
   games: {},
+  
   getGamesState: DataStates.NEVER,
   getGamesError: null,
 
@@ -19,7 +20,10 @@ const initialState: GamesState = {
   postGameError: null,
 
   deleteGameState: DataStates.NEVER,
-  deleteGameError: null
+  deleteGameError: null,
+
+  postTurnState: DataStates.NEVER,
+  postTurnError: null,
 }
 
 // REDUCERS //
@@ -39,7 +43,7 @@ const getGamesRequest: CaseReducer<GamesState, PayloadAction<void>> = (state) =>
 
 // #region > Success
 interface PayloadGetGamesSuccess {
-  games: GameInfo[]
+  games: PayloadGameInfoGet[]
 }
 const getGamesSuccess: CaseReducer<GamesState, PayloadAction<PayloadGetGamesSuccess>> = (state, action) => {
   const { games } = action.payload
@@ -60,6 +64,45 @@ const getGamesFailure: CaseReducer<GamesState, PayloadAction<PayloadGetGamesFail
   state.getGamesState = DataStates.FAILURE
   state.getGamesError = action.payload.error
 }
+// #endregion
+
+// #endregion
+
+// #region Get Game
+
+/*
+ * Game getter reducers 
+ */
+
+// #region > Request
+const getGameRequest: CaseReducer<GamesState, PayloadAction<void>> = (state) => {
+  state.getGamesState = state.getGamesState === DataStates.NEVER ? DataStates.FETCHING_FIRST : DataStates.FETCHING
+  state.getGamesError = null
+}
+// #endregion
+
+// #region > Success
+interface PayloadGetGameSuccess {
+  game: PayloadGameInfoGet
+}
+const getGameSuccess: CaseReducer<GamesState, PayloadAction<PayloadGetGameSuccess>> = (state, action) => {
+  const { game } = action.payload
+  state.games[game.id] = game
+  state.getGamesState = DataStates.SUCCESS
+  state.getGamesError = null
+}
+// #endregion
+
+// #region > Failure
+interface PayloadGetGameFailure {
+  error: string
+}
+const getGameFailure: CaseReducer<GamesState, PayloadAction<PayloadGetGameFailure>> = (state, action) => {
+  state.getGamesState = DataStates.FAILURE
+  state.getGamesError = action.payload.error
+}
+// #endregion
+
 // #endregion
 
 // #region Post Game
@@ -92,6 +135,7 @@ const postGameFailure: CaseReducer<GamesState, PayloadAction<PayloadPostGameFail
 }
 // #endregion
 
+// #endregion
 
 // #region Delete Game
 
@@ -131,6 +175,48 @@ const deleteGameFailure: CaseReducer<GamesState, PayloadAction<PayloadDeleteGame
 }
 // #endregion
 
+// #endregion
+
+// #region Post Turn
+
+/*
+ * Game Turn Host
+ */
+
+// #region > Request
+interface PayloadPostTurnRequest {
+  gameId: string
+}
+const postTurnRequest: CaseReducer<GamesState, PayloadAction<PayloadPostTurnRequest>> = (state) => {
+  state.postTurnState = DataStates.FETCHING
+  state.postTurnError = null
+}
+// #endregion
+
+// #region > Success
+interface PayloadPostTurnSuccess {
+  game: PayloadGameInfoGet
+}
+const postTurnSuccess: CaseReducer<GamesState, PayloadAction<PayloadPostTurnSuccess>> = (state, action) => {
+  const { game } = action.payload
+  state.postTurnState = DataStates.SUCCESS
+  state.postTurnError = null
+  state.games[game.id] = game
+}
+// #endregion
+
+// #region > Failure
+interface PayloadPostTurnFailure {
+  error: string
+}
+const postTurnFailure: CaseReducer<GamesState, PayloadAction<PayloadPostTurnFailure>> = (state, action) => {
+  state.postTurnState = DataStates.FAILURE
+  state.postTurnError = action.payload.error
+}
+// #endregion
+
+// #endregion
+
 // SLICE //
 
 const GamesSlice = createSlice({
@@ -142,13 +228,21 @@ const GamesSlice = createSlice({
     getGamesSuccess,
     getGamesFailure,
 
+    getGameRequest,
+    getGameSuccess,
+    getGameFailure,
+
     postGameRequest,
     postGameSuccess,
     postGameFailure,
 
     deleteGameRequest,
     deleteGameSuccess,
-    deleteGameFailure
+    deleteGameFailure,
+
+    postTurnRequest,
+    postTurnSuccess,
+    postTurnFailure,
   },
 })
 

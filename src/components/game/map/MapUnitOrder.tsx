@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // Utils
 import GameSelectors from '../../../store/game/game.selectors'
-import { UnitOrders } from '../../../lib/model/constants/UnitOrder'
+import { UnitOrder } from '../../../lib/model/constants/UnitOrder'
 import { angle, distance, tile2point } from '../../../lib/utils/geometry'
 // CSS
 import './MapUnitOrder.css'
@@ -25,7 +25,7 @@ export const MapUnitOrder = ({
   const oddRow = (tile.y % 2) === 1
   const classes = ['ap-dom-map-unit-order']
   switch (unit.order?.key) {
-    case UnitOrders.MOVE: {
+    case UnitOrder.MOVE: {
       classes.push('ap-dom-map-unit-order--move')
       const tilePoint = tile2point(tile)
       const orderPoint = tile2point(unit.order.data)

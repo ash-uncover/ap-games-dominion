@@ -5,11 +5,11 @@ import {
 } from '@reduxjs/toolkit'
 import { DataStates } from '@uncover/js-utils'
 
-import { GameData, GameDataBuilding, GameDataPlayer, GameDataUnit } from '../../lib/model/game/GameData'
-import { UnitOrder, UnitOrders } from '../../lib/model/constants/UnitOrder'
+//import { GameData, GameDataBuilding, GameDataPlayer, GameDataUnit } from '../../lib/model/game/GameData'
+import { UnitOrder } from '../../lib/model/constants/UnitOrder'
 
 import { GameBuilding, GamePlayer, GameState, GameUnit } from './game.state'
-import { building } from './game.selectors'
+import { PayloadGameTurnDataGet, PayloadGameTurnDataGetBuilding, PayloadGameTurnDataGetPlayer, PayloadGameTurnDataGetUnit } from 'src/lib/model/payload/PayloadGameTurnDataGet'
 
 // STATE //
 
@@ -19,8 +19,6 @@ const initialState: GameState = {
   turn: -1,
   player: '',
   map: {
-    width: -1,
-    height: -1,
     tiles: []
   },
   selectedTile: '',
@@ -51,10 +49,6 @@ interface PayloadGetGameTurnRequest {
   playerId: string
 }
 const getGameTurnRequest: CaseReducer<GameState, PayloadAction<PayloadGetGameTurnRequest>> = (state, action) => {
-  const {
-    gameId,
-    playerId
-  } = action.payload
   state.getGameTurnState = DataStates.FETCHING
   state.getGameTurnError = null
 }
@@ -64,13 +58,13 @@ const getGameTurnRequest: CaseReducer<GameState, PayloadAction<PayloadGetGameTur
 interface PayloadGetGameTurnSuccess {
   gameId: string
   playerId: string
-  gameData: GameData
+  turnData: PayloadGameTurnDataGet
 }
 const getGameTurnSuccess: CaseReducer<GameState, PayloadAction<PayloadGetGameTurnSuccess>> = (state, action) => {
   const {
     gameId,
     playerId,
-    gameData
+    turnData
   } = action.payload
   // Request Info
   state.getGameTurnState = DataStates.SUCCESS
@@ -79,16 +73,13 @@ const getGameTurnSuccess: CaseReducer<GameState, PayloadAction<PayloadGetGameTur
   state.selectedTile = null
   state.selectedUnits = []
   // Basic Info
-  state.id = gameData.id
-  state.name = gameData.name
-  state.turn = gameData.turn
+  state.id = gameId
+  state.turn = turnData.turn
   state.player = playerId
   // Map Info
   state.tiles = {}
   state.map = {
-    width: gameData.setup.map.width,
-    height: gameData.setup.map.height,
-    tiles: gameData.map.tiles.map(
+    tiles: turnData.map.tiles.map(
       tiles => tiles.map(
         tile => {
           state.tiles[tile.id] = {
@@ -102,7 +93,7 @@ const getGameTurnSuccess: CaseReducer<GameState, PayloadAction<PayloadGetGameTur
     )
   }
   // Players Info
-  state.players = gameData.players.reduce((acc: Record<string, GamePlayer>, playerData: GameDataPlayer) => {
+  state.players = turnData.players.reduce((acc: Record<string, GamePlayer>, playerData: PayloadGameTurnDataGetPlayer) => {
     const player = {
       id: playerData.id,
       name: playerData.name,
@@ -114,26 +105,26 @@ const getGameTurnSuccess: CaseReducer<GameState, PayloadAction<PayloadGetGameTur
     return acc
   }, {})
   // Buildings Info
-  state.buildings = gameData.buildings.reduce((acc: Record<string, GameBuilding>, buildingData: GameDataBuilding) => {
-    state.tiles[buildingData.tile].buildings.push(buildingData.id)
-    state.players[buildingData.player].buildings.push(buildingData.id)
+  state.buildings = turnData.buildings.reduce((acc: Record<string, GameBuilding>, buildingData: PayloadGameTurnDataGetBuilding) => {
+    state.tiles[buildingData.tileId].buildings.push(buildingData.id)
+    state.players[buildingData.playerId].buildings.push(buildingData.id)
     const building: GameBuilding = {
       id: buildingData.id,
-      player: buildingData.player,
-      tile: buildingData.tile,
+      player: buildingData.playerId,
+      tile: buildingData.tileId,
       name: buildingData.name,
     }
     acc[buildingData.id] = building
     return acc
   }, {})
   // Units Info
-  state.units = gameData.units.reduce((acc: Record<string, GameUnit>, unitData: GameDataUnit) => {
-    state.tiles[unitData.tile].units.push(unitData.id)
-    state.players[unitData.player].units.push(unitData.id)
+  state.units = turnData.units.reduce((acc: Record<string, GameUnit>, unitData: PayloadGameTurnDataGetUnit) => {
+    state.tiles[unitData.tileId].units.push(unitData.id)
+    state.players[unitData.playerId].units.push(unitData.id)
     const unit = {
       id: unitData.id,
-      player: unitData.player,
-      tile: unitData.tile,
+      player: unitData.playerId,
+      tile: unitData.tileId,
       name: unitData.name,
       order: unitData.order,
     }
@@ -156,6 +147,12 @@ const getGameTurnFailure: CaseReducer<GameState, PayloadAction<PayloadGetGameTur
 }
 // #endregion
 
+// #region > Outdate
+const getGameTurnOutdate: CaseReducer<GameState, PayloadAction<void>> = (state, action) => {
+  state.getGameTurnState = DataStates.OUTDATED
+}
+// #endregion
+
 // #endregion
 
 // #region Put Game Turn
@@ -170,10 +167,6 @@ interface PayloadPutGameTurnRequest {
   playerId: string
 }
 const putGameTurnRequest: CaseReducer<GameState, PayloadAction<PayloadPutGameTurnRequest>> = (state, action) => {
-  const {
-    gameId,
-    playerId
-  } = action.payload
   state.putGameTurnState = DataStates.FETCHING
   state.putGameTurnError = null
 }
@@ -206,6 +199,7 @@ const putGameTurnFailure: CaseReducer<GameState, PayloadAction<PayloadPutGameTur
   state.putGameTurnError = error
 }
 // #endregion
+
 
 // #endregion
 
@@ -264,8 +258,8 @@ const setUnitOrder: CaseReducer<GameState, PayloadAction<PayloadSetUnitOrder>> =
   } = action.payload
   const unit = state.units[id]
   const tile = state.tiles[unit.tile]
-  if (key === UnitOrders.MOVE && data.x === tile.x && data.y === tile.y) {
-    unit.order = { key: 'NONE' }
+  if (key === UnitOrder.MOVE && data.x === tile.x && data.y === tile.y) {
+    unit.order = { key: UnitOrder.NONE }
   } else {
     state.units[id].order = {
       key,
@@ -291,6 +285,7 @@ const GameSlice = createSlice({
     getGameTurnRequest,
     getGameTurnSuccess,
     getGameTurnFailure,
+    getGameTurnOutdate,
     
     putGameTurnRequest,
     putGameTurnSuccess,

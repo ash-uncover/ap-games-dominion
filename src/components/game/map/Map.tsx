@@ -18,9 +18,9 @@ export const Map = ({
   const map = useSelector(GameSelectors.map)
   const playerCurrent = useSelector(GameSelectors.playerCurrent)
   useEffect(() => {
-    if (ref.current) {
-      ref.current.style.width = `${10 * map.width}rem`
-      ref.current.style.height = `${10 * map.height}rem`
+    if (ref.current && map) {
+      ref.current.style.width = `${10 * map.tiles.length}rem`
+      ref.current.style.height = `${10 * map.tiles[0].length}rem`
     }
   }, [map])
   // #endregion

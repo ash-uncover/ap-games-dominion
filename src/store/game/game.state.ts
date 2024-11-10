@@ -24,8 +24,6 @@ export interface GameState {
 }
 
 export interface GameMap {
-  width: number
-  height: number
   tiles: string[][]
 }
 

@@ -5,4 +5,13 @@
   align-items: center;
   padding: 0 2rem;
   justify-content: space-between;
+
+  & .ap-dom-game-header_button-end {
+    &.ap-dom-game-header_button-end--complete {
+      border: 2px solid gold;
+    }
+    &.ap-dom-game-header_button-end--incomplete {
+
+    }
+  }
 }

@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 // Utils
 import { DataStates } from '@uncover/js-utils'
 import GamesSelectors from '../../../store/games/games.selectors'
-import { GameService, loadGames, deleteGame } from '../../../service/GameService'
+import { getGames, deleteGame } from '../../../service/GameServiceHelper'
+import { GameService } from '../../../service/GameService'
 // CSS
 import './Games.css'
 
@@ -25,7 +26,7 @@ export const Games = ({
 
   useEffect(() => {
     if (state === DataStates.NEVER) {
-      loadGames(service, dispatch)
+      getGames(service, dispatch)
     }
   }, [state])
   // #endregion
