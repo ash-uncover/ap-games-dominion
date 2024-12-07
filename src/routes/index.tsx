@@ -10,7 +10,7 @@ import { HomePlayOnline } from '../components/home/play/online/HomePlayOnline'
 import { HomePlayLoad } from '../components/home/play/load/HomePlayLoad'
 import { HomeSettings } from '../components/home/settings/HomeSettings'
 import { HomeSettingsGame } from '../components/home/settings/game/HomeSettingsGame'
-import { HomeSettingsVideo } from '../components/home/settings/video/HomeSettingsVideo'
+import { HomeSettingsDisplay } from '../components/home/settings/display/HomeSettingsDisplay'
 import { HomeSettingsAudio } from '../components/home/settings/audio/HomeSettingsAudio'
 import { HomeCredits } from '../components/home/credits/HomeCredits'
 
@@ -29,7 +29,7 @@ export const RouteRoot = () => {
         <Route path='play/load' element={<HomePlayLoad />} />
         <Route path='settings' element={<HomeSettings />} />
         <Route path='settings/game' element={<HomeSettingsGame />} />
-        <Route path='settings/video' element={<HomeSettingsVideo />} />
+        <Route path='settings/display' element={<HomeSettingsDisplay />} />
         <Route path='settings/audio' element={<HomeSettingsAudio />} />
         <Route path='credits' element={<HomeCredits />} />
       </Route>

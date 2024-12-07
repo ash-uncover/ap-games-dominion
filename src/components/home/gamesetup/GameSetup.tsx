@@ -16,9 +16,11 @@ import './GameSetup.css'
 
 interface GameSetupProperties {
   service: GameService
+  onCreateGame: () => void
 }
 export const GameSetup = ({
-  service
+  service,
+  onCreateGame,
 }: GameSetupProperties) => {
 
   // #region Hooks

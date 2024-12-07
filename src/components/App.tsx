@@ -1,37 +1,25 @@
-import React, { PropsWithChildren, useContext, useEffect, useState } from 'react'
+import React, { PropsWithChildren } from 'react'
+import { GameApp } from '@uncover/games-common';
 // CSS
 import './App.css'
-import { GameSettingsContext } from './commons/GameSettingsProvider';
 
 interface AppProperties extends PropsWithChildren { }
-
 export const App = ({
   children
 }: AppProperties) => {
 
   // #region Hooks
-  const settingsContext = useContext(GameSettingsContext)
-  const [style, setStyle] = useState({})
-  useEffect(() => {
-    const {
-      brightness,
-      contrast
-    } = settingsContext
-    setStyle({
-      filter: `brightness(${brightness / 100}) contrast(${contrast / 100})`
-    })
-  }, [settingsContext])
   // #endregion
 
   // #region Rendering
   return (
-    <div
+    <GameApp
       className='ap-dom-app'
-      style={style}
+      name='ap-dom'
     >
       {children}
       <AppCredits />
-    </div>
+    </GameApp>
   )
   // #endregion
 }

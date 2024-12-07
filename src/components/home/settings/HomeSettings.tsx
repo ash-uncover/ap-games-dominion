@@ -28,8 +28,8 @@ export const HomeSettings = ({
           onClick={() => { navigate('game') }}
         />
         <MenuItem
-          text={t('home.settings.video.menu')}
-          onClick={() => { navigate('video') }}
+          text={t('home.settings.display.menu')}
+          onClick={() => { navigate('display') }}
         />
         <MenuItem
           text={t('home.settings.audio.menu')}

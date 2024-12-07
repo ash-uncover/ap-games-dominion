@@ -55,7 +55,7 @@
             "enable": "Enable music"
           }
         },
-        "video": {
+        "display": {
           "menu": "Display",
           "title": "Display Settings",
           "brightness": {
