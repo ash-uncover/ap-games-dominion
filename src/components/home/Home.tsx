@@ -1,7 +1,8 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router'
 // CSS
 import './Home.css'
+import { MenuItem } from '@uncover/games-common'
 
 interface HomeProperties {
 }
@@ -10,6 +11,7 @@ export const Home = ({
 }: HomeProperties) => {
 
   // #region Hooks
+  const navigate = useNavigate()
   // #endregion
 
   // #region Events

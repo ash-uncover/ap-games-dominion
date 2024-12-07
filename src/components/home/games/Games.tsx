@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 // Utils
 import { DataStates } from '@uncover/js-utils'
@@ -70,7 +70,7 @@ export const Games = ({
           {Object.values(games).map(game => {
             return (
               <div key={game.id}>
-                {game.name} 
+                {game.name}
                 <button onClick={() => handleToGameClick(game.id)}>
                   To Game
                 </button>

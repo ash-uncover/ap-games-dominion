@@ -1,9 +1,5 @@
 .ap-dom-app {
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-  
-  & .ap-dom-app_credits {
+  & > .ap-dom-app_credits {
     position: absolute;
     pointer-events: none;
     bottom: 0.5rem;

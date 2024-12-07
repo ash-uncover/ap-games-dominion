@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 // Utils
 import { DataStates } from '@uncover/js-utils'
@@ -21,9 +21,9 @@ export const GameLobby = ({
   // #region Hooks
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  
+
   const { gameId } = useParams()
-  
+
   const gamesState = useSelector(GamesSelectors.getGamesState)
   const gameData = useSelector(GamesSelectors.game(gameId))
 
@@ -58,7 +58,7 @@ export const GameLobby = ({
   if (!gameData || gamesState !== DataStates.SUCCESS) {
     return (
       <div className='ap-dom-game-lobby'>
-          <button 
+          <button
             onClick={handleBackClick}
           >
             {`Error finding game ${gameId}. Back to list.`}

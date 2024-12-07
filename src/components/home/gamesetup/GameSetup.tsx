@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 // Utils
 import { nameToId, resolveNextName } from '../../../lib/utils/names'
@@ -101,8 +101,8 @@ export const GameSetup = ({
       return players.concat({
         name: resolveNextName(players.map(p => p.name), 'Player'),
         nation: null,
-        type: PlayerType.AI, 
-        level: PlayerLevel.NORMAL 
+        type: PlayerType.AI,
+        level: PlayerLevel.NORMAL
       })
     })
   }
@@ -160,7 +160,7 @@ export const GameSetup = ({
         <div className='error'>{heightError}</div>
       : null}
       <h3>Players ({players.length})</h3>
-      {players.map((player, index) => 
+      {players.map((player, index) =>
         <GameSetupPlayer
           key={`player-${index}`}
           name={player.name}
@@ -175,19 +175,19 @@ export const GameSetup = ({
         <div className='error'>{playersError}</div>
       : null}
       <div>
-        <button 
+        <button
           onClick={handleAddPlayerClick}
         >
           add
         </button>
       </div>
       <div>
-        <button 
+        <button
           onClick={handleCancelClick}
         >
           Cancel
         </button>
-        <button 
+        <button
           disabled={disabled}
           onClick={handleStartClick}
         >

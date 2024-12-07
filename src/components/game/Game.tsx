@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { DataStates } from '@uncover/js-utils'
 // Stores
@@ -75,8 +75,8 @@ export const Game = ({
     case DataStates.SUCCESS: {
       return (
         <div className='ap-dom-game'>
-          <GameHeader 
-            service={service} 
+          <GameHeader
+            service={service}
           />
           <main className='ap-dom-game_main'>
             <GameContainer>

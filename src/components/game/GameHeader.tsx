@@ -10,9 +10,9 @@ import { PayloadGameTurnOrdersPut } from '../../lib/model/payload/PayloadGameTur
 import { PlayerTurnState } from '../../lib/model/constants/PlayerTurnState'
 // CSS
 import './GameHeader.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
-type EndState = 
+type EndState =
   | 'INCOMPLETE'
   | 'COMPLETE'
 const EndStates: {
@@ -78,7 +78,7 @@ export const GameHeader = ({
   return (
       <header className='ap-dom-game-header'>
         {`Turn n°${turn} - ${player?.name}`}
-        <button 
+        <button
           className={classesButtonEnd.join(' ')}
           onClick={handleEndTurnClick}
         >

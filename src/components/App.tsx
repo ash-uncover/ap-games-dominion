@@ -1,40 +1,48 @@
-import React, { useContext } from 'react'
-import { Outlet } from 'react-router-dom'
-import {
-  GameSettingsContext,
-  GameSettingsDispatchContext,
-  GameSettingsProvider,
-  GameSettingsActions,
-  GameApp 
-} from '@uncover/games-common'
+import React, { PropsWithChildren, useContext, useEffect, useState } from 'react'
 // CSS
 import './App.css'
+import { GameSettingsContext } from './commons/GameSettingsProvider';
 
-// Add this in your component file
-require('react-dom');
-// @ts-ignore
-window.React2 = require('react');
-// @ts-ignore
-console.log(window.React1 === window.React2);
-
-interface AppProperties { }
+interface AppProperties extends PropsWithChildren { }
 
 export const App = ({
+  children
 }: AppProperties) => {
 
   // #region Hooks
+  const settingsContext = useContext(GameSettingsContext)
+  const [style, setStyle] = useState({})
+  useEffect(() => {
+    const {
+      brightness,
+      contrast
+    } = settingsContext
+    setStyle({
+      filter: `brightness(${brightness / 100}) contrast(${contrast / 100})`
+    })
+  }, [settingsContext])
   // #endregion
 
   // #region Rendering
   return (
-    <GameSettingsProvider name='ap-dom'>
-      <GameApp className='ap-dom-app'>
-        <Outlet />
-        <div className='ap-dom-app_credits'>
-          @aSHuncover 2024
-        </div>
-      </GameApp>
-    </GameSettingsProvider>
+    <div
+      className='ap-dom-app'
+      style={style}
+    >
+      {children}
+      <AppCredits />
+    </div>
+  )
+  // #endregion
+}
+
+export const AppCredits = () => {
+
+  // #region Rendering
+  return (
+    <div className='ap-dom-app_credits'>
+      @aSHuncover 2024
+    </div>
   )
   // #endregion
 }

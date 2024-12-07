@@ -8,11 +8,17 @@
     "home": {
       "menu": "Home",
       "title": "Home",
-      "local": {
-        "menu": "Local"
-      },
-      "online": {
-        "menu": "Online"
+      "play": {
+        "menu": "Play",
+        "new": {
+          "menu": "Create New Game"
+        },
+        "load": {
+          "menu": "Continue Game"
+        },
+        "online": {
+          "menu": "Online"
+        }
       },
       "settings": {
         "menu": "Settings",
@@ -49,7 +55,7 @@
             "enable": "Enable music"
           }
         },
-        "display": {
+        "video": {
           "menu": "Display",
           "title": "Display Settings",
           "brightness": {
@@ -69,30 +75,6 @@
       },
       "exit": {
         "menu": "Exit"
-      }
-    },
-    "game": {
-      "start": {
-        "text": "Start",
-        "tooltip": "Start Game"
-      },
-      "previous": {
-        "text": "Previous Image",
-        "tooltip": "Sélect previous image"
-      },
-      "dialogs": {
-        "defeat": {
-          "title": "Menu",
-          "replay": "Restart",
-          "quit": "Main Menu",
-          "continue": "Continue"
-        },
-        "victory": {
-          "title": "Level Cmpleted",
-          "replay": "Replay",
-          "quit": "Main Menu",
-          "continue": "Continue"
-        }
       }
     }
   }
