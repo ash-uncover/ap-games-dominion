@@ -1,13 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { MenuItem } from '@uncover/games-common'
+import { GameSetup } from '../../../commons/gamesetup/GameSetup'
+import { GameLocalService } from '../../../../service/GameLocalService'
 // CSS
 import './HomePlayNew.css'
 
-interface HomePlayNewProperties {
-}
-
+interface HomePlayNewProperties {}
 export const HomePlayNew = ({
 }: HomePlayNewProperties) => {
 
@@ -17,12 +16,18 @@ export const HomePlayNew = ({
   // #endregion
 
   // #region Events
+  function handleCreateGame() {
+
+  }
   // #endregion
 
   // #region Rendering
   return (
     <main className='ap-dom-home-play-new'>
-      CREATE GAME
+      <GameSetup
+        service={GameLocalService}
+        onCreateGame={handleCreateGame}
+      />
       <button
         onClick={() => { navigate('/play') }}
       >

@@ -7,9 +7,9 @@ import GamesSelectors from '../../../store/games/games.selectors'
 import { getGame, postGameTurn } from '../../../service/GameServiceHelper'
 import { GameService } from '../../../service/GameService'
 import { GameStatus } from '../../../lib/model/constants/GameStatus'
+import { GameLobbyPlayer } from './GameLobbyPlayer'
 // CSS
 import './GameLobby.css'
-import { GameLobbyPlayer } from './GameLobbyPlayer'
 
 interface GameLobbyProperties {
   service: GameService

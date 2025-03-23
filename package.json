@@ -11,7 +11,7 @@
     "@fortawesome/free-regular-svg-icons": "6.7.1",
     "@fortawesome/free-solid-svg-icons": "6.7.1",
     "@fortawesome/react-fontawesome": "0.2.2",
-    "@uncover/games-common": "ash-uncover/ap-games-common",
+    "@uncover/games-common": "../ap-games-common",
     "@uncover/js-utils": "0.0.16",
     "@uncover/js-utils-fetch": "0.0.6",
     "@uncover/js-utils-logger": "0.2.1",
