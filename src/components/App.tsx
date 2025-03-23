@@ -15,6 +15,7 @@ export const App = ({
   return (
     <GameApp
       className='ap-dom-app'
+      name='ap-dom'
     >
       {children}
       <AppCredits />
