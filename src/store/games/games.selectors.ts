@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { DataState } from '@uncover/js-utils'
+import { DataState } from '@sol.ac/js-utils'
 import { RootState } from '../state'
 import { PayloadGameInfoGet, PayloadGameInfoGetPlayer } from '../../lib/model/payload/PayloadGameInfoGet'
 

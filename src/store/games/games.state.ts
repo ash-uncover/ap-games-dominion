@@ -1,4 +1,4 @@
-import { DataState } from '@uncover/js-utils'
+import { DataState } from '@sol.ac/js-utils'
 import { PayloadGameInfoGet } from '../../lib/model/payload/PayloadGameInfoGet'
 
 export interface GamesState {

@@ -1,6 +1,8 @@
 import React, { PropsWithChildren } from 'react'
-import { GameApp } from '@uncover/games-common';
-// CSS
+
+import { GameApp } from '@sol.ac/games-common';
+import { Button } from '@sol.ac/react-commons/dist/components/button/Button';
+
 import './App.css'
 
 interface AppProperties extends PropsWithChildren { }

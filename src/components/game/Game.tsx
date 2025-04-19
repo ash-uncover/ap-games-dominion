@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { DataStates } from '@uncover/js-utils'
+import { DataStates } from '@sol.ac/js-utils'
 // Stores
 import GameSlice from '../../store/game/game.slice'
 import GameSelectors from '../../store/game/game.selectors'

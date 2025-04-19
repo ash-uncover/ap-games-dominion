@@ -1,8 +1,8 @@
 import React from 'react'
 import { Outlet, useNavigate } from 'react-router'
+
 // CSS
 import './Home.css'
-import { MenuItem } from '@uncover/games-common'
 
 interface HomeProperties {
 }

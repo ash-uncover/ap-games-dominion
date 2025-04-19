@@ -3,7 +3,7 @@ import {
   createSlice,
   PayloadAction
 } from '@reduxjs/toolkit'
-import { DataStates } from '@uncover/js-utils'
+import { DataStates } from '@sol.ac/js-utils'
 
 //import { GameData, GameDataBuilding, GameDataPlayer, GameDataUnit } from '../../lib/model/game/GameData'
 import { UnitOrder } from '../../lib/model/constants/UnitOrder'

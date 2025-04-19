@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 // Utils
-import { DataStates } from '@uncover/js-utils'
+import { DataStates } from '@sol.ac/js-utils'
 import GamesSelectors from '../../../store/games/games.selectors'
 import { getGames, deleteGame } from '../../../service/GameServiceHelper'
 import { GameService } from '../../../service/GameService'

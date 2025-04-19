@@ -1,4 +1,4 @@
-import { Logger } from '@uncover/js-utils-logger'
+import { Logger } from '@sol.ac/js-utils-logger'
 const LOGGER = new Logger('CONFIG')
 
 // Default hard-coded values

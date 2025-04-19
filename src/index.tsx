@@ -22,8 +22,8 @@ import { store } from './store'
 // Import components
 import { RouteRoot } from './routes'
 import { CONFIG } from './config'
-import { ShortcutManager } from '@uncover/games-common'
-import { WardDevTools, WardProvider } from '@uncover/ward-react'
+import { ShortcutManager } from '@sol.ac/games-common'
+import { WardDevTools, WardProvider } from '@sol.ac/ward-react'
 import { App } from './components/App'
 
 ShortcutManager.reset()

@@ -1,5 +1,5 @@
 import React from 'react'
-import { MenuItem } from '@uncover/games-common'
+import { MenuItem } from '@sol.ac/games-common'
 // CSS
 import './HomePlay.css'
 import { useNavigate } from 'react-router'

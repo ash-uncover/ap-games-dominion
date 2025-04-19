@@ -1,4 +1,4 @@
-import { DataState } from '@uncover/js-utils'
+import { DataState } from '@sol.ac/js-utils'
 import { UnitOrder } from '../../lib/model/constants/UnitOrder'
 
 export interface GameState {

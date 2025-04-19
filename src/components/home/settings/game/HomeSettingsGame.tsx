@@ -1,5 +1,4 @@
 import React from 'react'
-import { MenuItem } from '@uncover/games-common'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 // CSS

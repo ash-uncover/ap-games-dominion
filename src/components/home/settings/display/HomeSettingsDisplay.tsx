@@ -5,7 +5,7 @@ import {
   Panel,
   GameSettingDisplayBrightnessSlider,
   GameSettingDisplayContrastSlider
-} from '@uncover/games-common'
+} from '@sol.ac/games-common'
 // CSS
 import './HomeSettingsDisplay.css'
 

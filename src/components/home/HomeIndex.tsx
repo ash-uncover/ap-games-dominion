@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { MenuItem } from '@uncover/games-common'
+import { MenuItem } from '@sol.ac/games-common'
 // CSS
 import './HomeIndex.css'
 

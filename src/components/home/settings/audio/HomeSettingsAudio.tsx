@@ -1,5 +1,4 @@
 import React from 'react'
-import { MenuItem } from '@uncover/games-common'
 // CSS
 import './HomeSettingsAudio.css'
 import { useNavigate } from 'react-router'

@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit'
 
 import { GamesState } from './games.state'
-import { DataStates } from '@uncover/js-utils'
+import { DataStates } from '@sol.ac/js-utils'
 import { PayloadGameInfoGet } from '../../lib/model/payload/PayloadGameInfoGet'
 
 // STATE //
