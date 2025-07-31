@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // Utils
 import GameSelectors from '../../../store/game/game.selectors'
 import GameSlice from '../../../store/game/game.slice'
 import { UnitOrder } from '../../../lib/model/constants/UnitOrder'
-// Components
-import { Panel } from '../../../lib/components/panel/Panel'
 // CSS
 import './UnitPanel.css'
+import { Panel } from '@sol.ac/react-commons'
 
 interface UnitPanelProperties {}
 
@@ -16,13 +15,13 @@ export const UnitPanel = ({
 
   // #region > Hooks
   const dispatch = useDispatch()
-  const [show, setShow] = useState<boolean>(false)
-  const [actions, setActions] = useState<UnitOrder[]>([])
+  const [show, setShow] = React.useState<boolean>(false)
+  const [actions, setActions] = React.useState<UnitOrder[]>([])
   const currentPlayer = useSelector(GameSelectors.playerId)
   const selectedUnits = useSelector(GameSelectors.selectedUnits)
   const unitsSelected = useSelector(GameSelectors.unitsSelected)
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (unitsSelected.length && unitsSelected[0].player === currentPlayer) {
       setShow(true)
       setActions(Object.values(UnitOrder))

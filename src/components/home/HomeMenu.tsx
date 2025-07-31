@@ -1,7 +1,6 @@
 import React from 'react'
 import * as ReactI18n from 'react-i18next'
-import { ICONS } from '@sol.ac/react-commons'
-import { Menu } from '../../lib/components/menu/Menu'
+import { ICONS, Menu } from '@sol.ac/react-commons'
 // Local Stuff
 import { Home } from './Home'
 import { HomeSettingsGame } from './settings/game/HomeSettingsGame'

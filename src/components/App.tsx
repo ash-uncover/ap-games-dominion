@@ -1,6 +1,7 @@
 import React from 'react'
-
-import { GameApp } from '@sol.ac/games-common';
+import { GameApp } from '@sol.ac/games-common'
+//
+import { AppCredits } from './AppCredits'
 // CSS
 import './App.css'
 
@@ -30,20 +31,3 @@ export const App = ({
 }
 // #endregion
 
-// #region Declaration
-interface AppCreditsProperties { }
-// #endregion
-
-// #region Component
-export const AppCredits = ({
-}: AppCreditsProperties) => {
-
-  // #region > Render
-  return (
-    <div className='ap-dom-app-credits'>
-      @aSHuncover 2024
-    </div>
-  )
-  // #endregion
-}
-// #endregion

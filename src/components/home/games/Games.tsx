@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-// Utils
 import { DataStates } from '@sol.ac/js-utils'
+// Utils
 import GamesSelectors from '../../../store/games/games.selectors'
 import { getGames, deleteGame } from '../../../service/GameServiceHelper'
 import { GameService } from '../../../service/GameService'
 // CSS
 import './Games.css'
 
+// #region Declaration
 interface GamesProperties {
   service: GameService
 }
+// #endregion
+
+// #region Component
 export const Games = ({
   service
 }: GamesProperties) => {
@@ -98,5 +102,4 @@ export const Games = ({
   }
   // #endregion
 }
-
-
+// #endregion

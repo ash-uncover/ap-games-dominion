@@ -1,12 +1,12 @@
 import React from 'react'
 import * as ReactI18n from 'react-i18next'
 import {
-  Panel,
   GameSettingDisplayBrightnessSlider,
   GameSettingDisplayContrastSlider
 } from '@sol.ac/games-common'
 // CSS
 import './HomeSettingsDisplay.css'
+import { Panel } from '@sol.ac/react-commons'
 
 // #region Declaration
 interface HomeSettingsDisplayProperties {
@@ -28,11 +28,7 @@ export const HomeSettingsDisplay = ({
   // #region > Render
   return (
     <main className='ap-dom-home-settings-display'>
-      <Panel>
-        <h2>
-          {t('home.settings.display.title')}
-        </h2>
-      </Panel>
+      <Panel title={t('home.settings.display.title')} />
 
       <Panel title={t('home.settings.display.brightness.title')}>
         <GameSettingDisplayBrightnessSlider

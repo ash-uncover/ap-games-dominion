@@ -1,5 +1,4 @@
 import React from 'react'
-import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 // CSS
 import './HomeCredits.css'
@@ -14,7 +13,6 @@ export const HomeCredits = ({
 }: HomeCreditsProperties) => {
 
   // #region > Hooks
-  const navigate = useNavigate()
   const { t } = useTranslation()
   // #endregion
 

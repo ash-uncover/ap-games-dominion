@@ -2,10 +2,13 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import GameSelectors from '../../../store/game/game.selectors'
 
+// #region Declaration
 interface TilePanelBuildingProperties {
   id: string
 }
+// #endregion
 
+// #region Component
 export const TilePanelBuilding = ({
   id
 }: TilePanelBuildingProperties) => {
@@ -29,3 +32,4 @@ export const TilePanelBuilding = ({
   )
   // #endregion
 }
+// #endregion

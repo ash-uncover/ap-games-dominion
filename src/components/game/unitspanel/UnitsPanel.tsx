@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-// Utils
+//
 import GameSelectors from '../../../store/game/game.selectors'
-// Components
-import { Panel } from '../../../lib/components/panel/Panel'
 import { UnitsPanelUnit } from './UnitsPanelUnit'
 // CSS
 import './UnitsPanel.css'
+import { Panel } from '@sol.ac/react-commons'
 
 interface UnitsPanelProperties {}
 
@@ -14,13 +13,13 @@ export const UnitsPanel = ({
 }: UnitsPanelProperties) => {
 
   // #region > Hooks //
-  const [show, setShow] = useState<boolean>(false)
+  const [show, setShow] = React.useState<boolean>(false)
   
   const selectedTile = useSelector(GameSelectors.selectedTile)
   const selectedUnits = useSelector(GameSelectors.selectedUnits)
   const tile = useSelector(GameSelectors.tile(selectedTile))
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (tile && selectedUnits.length) {
       setShow(tile.units.includes(selectedUnits[0]))
     } else {
@@ -44,9 +43,7 @@ export const UnitsPanel = ({
   return (
     <Panel
       className={classes.join(' ')}
-      closable
       title={'Units'}
-      onClose={handleClose}
     >
       <ul>
         {tile.units.map(unit => {

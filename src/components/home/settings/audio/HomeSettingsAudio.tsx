@@ -1,8 +1,18 @@
 import React from 'react'
 import * as ReactI18n from 'react-i18next'
-import { GameSettingAudioGameSwitch, GameSettingAudioGameVolumeSlider, GameSettingAudioMasterSwitch, GameSettingAudioMasterVolumeSlider, GameSettingAudioMusicSwitch, GameSettingAudioMusicVolumeSlider, GameSettingAudioUiSwitch, GameSettingAudioUiVolumeSlider, Panel } from '@sol.ac/games-common'
+import { 
+  GameSettingAudioGameSwitch, 
+  GameSettingAudioGameVolumeSlider, 
+  GameSettingAudioMasterSwitch, 
+  GameSettingAudioMasterVolumeSlider, 
+  GameSettingAudioMusicSwitch, 
+  GameSettingAudioMusicVolumeSlider, 
+  GameSettingAudioUiSwitch, 
+  GameSettingAudioUiVolumeSlider
+} from '@sol.ac/games-common'
 // CSS
 import './HomeSettingsAudio.css'
+import { Panel } from '@sol.ac/react-commons'
 
 // #region Declaration
 interface HomeSettingsAudioProperties {
@@ -23,11 +33,7 @@ export const HomeSettingsAudio = ({
   // #region > Render
   return (
     <main className='ap-dom-home-settings-audio'>
-      <Panel>
-        <h2>
-          {t('home.settings.audio.title')}
-        </h2>
-      </Panel>
+      <Panel title={t('home.settings.audio.title')} />
 
       <Panel title={t('home.settings.audio.master.title')}>
         <GameSettingAudioMasterSwitch

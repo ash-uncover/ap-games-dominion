@@ -1,35 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import GameSelectors from '../../../store/game/game.selectors'
-import { Panel } from '../../../lib/components/panel/Panel'
 import { TilePanelBuilding } from './TilePanelBuilding'
 import { TilePanelUnit } from './TilePanelUnit'
 
 import './TilePanel.css'
+import { Panel } from '@sol.ac/react-commons'
 
-interface TilePanelProperties {}
+// #region Declaration
+interface TilePanelProperties {
 
+}
+// #endregion
+
+// #region Component
 export const TilePanel = ({
+  
 }: TilePanelProperties) => {
 
-  // #region > Hooks //
-  const [show, setShow] = useState<boolean>(false)
+  // #region > Hooks
+  const [show, setShow] = React.useState<boolean>(false)
   
   const selectedTile = useSelector(GameSelectors.selectedTile)
   const tile = useSelector(GameSelectors.tile(selectedTile))
 
-  useEffect(() => {
+  React.useEffect(() => {
     setShow(Boolean(selectedTile))
   }, [selectedTile])
   // #endregion
 
   // #region > Events
-  function handleClose() {
-    setShow(false)
-  }
   // #endregion
 
-  // Rendering //
+  // #region > Render
   if (!show) {
     return null
   }
@@ -38,9 +41,8 @@ export const TilePanel = ({
   return (
     <Panel
       className={classes.join(' ')}
-      closable
+      expandable={true}
       title={tile.id}
-      onClose={handleClose}
     >
       {tile.id}
       <ul>
@@ -59,3 +61,4 @@ export const TilePanel = ({
   )
   // #endregion
 }
+// #endregion

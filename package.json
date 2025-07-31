@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "build:docs": "webpack --config webpack.config.docs.js  --mode production",
-    "dev": "npm run update && npm run dev:webpack",
-    "dev:webpack": "webpack serve --config webpack.config.dev.js --progress --mode development --host 0.0.0.0",
+    "dev": "npm run dev:webpack",
+    "dev:webpack": "npm run update && webpack serve --config webpack.config.dev.js --progress --mode development --host 0.0.0.0",
     "test": "jest",
     "test:coverage": "jest --collectCoverage",
     "update": "npm update @sol.ac/react-commons @sol.ac/games-common"
@@ -29,12 +29,16 @@
     "react-dom": "19.1.1",
     "react-i18next": "15.6.1",
     "react-redux": "9.2.0",
+    "react-responsive": "10.0.1",
     "react-router": "7.7.1"
   },
   "devDependencies": {
+    "@babel/cli": "7.28.0",
     "@babel/core": "7.28.0",
+    "@babel/eslint-parser": "7.28.0",
     "@babel/preset-env": "7.28.0",
     "@babel/preset-react": "7.27.1",
+    "@babel/preset-typescript": "7.27.1",
     "@reduxjs/toolkit": "2.8.2",
     "@types/jest": "30.0.0",
     "babel-loader": "10.0.0",
