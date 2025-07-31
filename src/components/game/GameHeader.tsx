@@ -31,7 +31,7 @@ export const GameHeader = ({
   service
 }: GameHeaderProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [endState, setEndState]= useState(EndStates.INCOMPLETE)
@@ -48,7 +48,7 @@ export const GameHeader = ({
   }, [unitsCurrent])
   // #endregion
 
-  // #region Events
+  // #region > Events
   function handleEndTurnClick() {
     const orders: PayloadGameTurnOrdersPut = {
       gameId,
@@ -68,7 +68,7 @@ export const GameHeader = ({
   }
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   const classesButtonEnd = ['ap-dom-game-header_button-end']
   if (endState === EndStates.COMPLETE) {
     classesButtonEnd.push('ap-dom-game-header_button-end--complete')

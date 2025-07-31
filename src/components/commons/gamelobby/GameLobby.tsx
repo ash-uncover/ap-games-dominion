@@ -18,7 +18,7 @@ export const GameLobby = ({
   service
 }: GameLobbyProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -34,7 +34,7 @@ export const GameLobby = ({
   }, [gamesState, gameData])
   // #endregion
 
-  // #region Events
+  // #region > Events
   function handlePlayerClick(playerId: string) {
     navigate(`/games/${gameId}/player/${playerId}`)
   }
@@ -46,7 +46,7 @@ export const GameLobby = ({
   }
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   if (gamesState === DataStates.NEVER || gamesState === DataStates.FETCHING_FIRST || gamesState === DataStates.FETCHING) {
     return (
       <div className='ap-dom-game-lobby'>

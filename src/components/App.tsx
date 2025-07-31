@@ -1,19 +1,22 @@
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 
 import { GameApp } from '@sol.ac/games-common';
-import { Button } from '@sol.ac/react-commons/dist/components/button/Button';
-
+// CSS
 import './App.css'
 
-interface AppProperties extends PropsWithChildren { }
+// #region Declaration
+interface AppProperties extends React.PropsWithChildren { }
+// #endregion
+
+// #region Component
 export const App = ({
   children
 }: AppProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   return (
     <GameApp
       className='ap-dom-app'
@@ -25,14 +28,22 @@ export const App = ({
   )
   // #endregion
 }
+// #endregion
 
-export const AppCredits = () => {
+// #region Declaration
+interface AppCreditsProperties { }
+// #endregion
 
-  // #region Rendering
+// #region Component
+export const AppCredits = ({
+}: AppCreditsProperties) => {
+
+  // #region > Render
   return (
-    <div className='ap-dom-app_credits'>
+    <div className='ap-dom-app-credits'>
       @aSHuncover 2024
     </div>
   )
   // #endregion
 }
+// #endregion

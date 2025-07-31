@@ -9,11 +9,11 @@ import { GameHome } from '../../../components/game/GameHome'
 export const GameRoute = ({
 }) => {
 
-  // #region Hooks
+  // #region > Hooks
   let { gameId } = useParams();
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   return (
     <GameHome
       gameId={gameId}

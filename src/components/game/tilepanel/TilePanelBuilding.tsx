@@ -10,12 +10,12 @@ export const TilePanelBuilding = ({
   id
 }: TilePanelBuildingProperties) => {
 
-  // #region Hooks //
+  // #region > Hooks //
   const building = useSelector(GameSelectors.building(id))
   const player = useSelector(GameSelectors.player(building.player))
   // #endregion
 
-  // #region Events
+  // #region > Events
   // #endregion
 
   // Rendering //

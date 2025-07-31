@@ -1,6 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router'
-import { useTranslation } from 'react-i18next'
+import * as ReactI18n from 'react-i18next'
 import {
   Panel,
   GameSettingDisplayBrightnessSlider,
@@ -9,19 +8,24 @@ import {
 // CSS
 import './HomeSettingsDisplay.css'
 
-interface HomeSettingsDisplayProperties {}
+// #region Declaration
+interface HomeSettingsDisplayProperties {
+
+}
+// #endregion
+
+// #region Component
 export const HomeSettingsDisplay = ({
 }: HomeSettingsDisplayProperties) => {
 
-  // #region Hooks
-  const navigate = useNavigate()
-  const { t } = useTranslation()
+  // #region > Hooks
+  const { t } = ReactI18n.useTranslation()
   // #endregion
 
-  // #region Events
+  // #region > Events
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   return (
     <main className='ap-dom-home-settings-display'>
       <Panel>
@@ -41,13 +45,8 @@ export const HomeSettingsDisplay = ({
           label={t('home.settings.display.contrast.title')}
         />
       </Panel>
-
-      <button
-        onClick={() => { navigate('/settings') }}
-      >
-        {t('BACK')}
-      </button>
     </main>
   )
   // #endregion
 }
+// #endregion

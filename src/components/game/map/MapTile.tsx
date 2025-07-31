@@ -18,7 +18,7 @@ export const MapTile = ({
   id
 }: MapTileProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const dispatch = useDispatch()
   const ref = useRef<HTMLDivElement>(null)
   const tile = useSelector(GameSelectors.tile(id))
@@ -31,7 +31,7 @@ export const MapTile = ({
   }, [tile])
   // #endregion
 
-  // #region Events
+  // #region > Events
   function handleClick() {
     dispatch(GameSlice.actions.selectTile({ id }))
   }
@@ -49,7 +49,7 @@ export const MapTile = ({
   }
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   const classes = ['ap-dom-map-tile']
   if ((tile.x + tile.y) % 2) {
     classes.push('ap-dom-map-tile--odd')

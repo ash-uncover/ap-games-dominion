@@ -8,7 +8,7 @@ interface UnitProperties {
 export const Unit = ({
 }: UnitProperties) => {
 
-  // #region Hooks //
+  // #region > Hooks //
   // #endregion
 
   // Rendering //

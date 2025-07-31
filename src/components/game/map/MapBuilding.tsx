@@ -14,13 +14,13 @@ export const MapBuilding = ({
   id
 }: MapBuildingProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const building = useSelector(GameSelectors.building(id))
   const player = useSelector(GameSelectors.player(building.player))
   // #endregion
 
 
-  // #region Rendering
+  // #region > Render
   const classes = ['ap-dom-map-building']
   return (
     <div 

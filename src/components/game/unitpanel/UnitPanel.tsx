@@ -5,7 +5,7 @@ import GameSelectors from '../../../store/game/game.selectors'
 import GameSlice from '../../../store/game/game.slice'
 import { UnitOrder } from '../../../lib/model/constants/UnitOrder'
 // Components
-import { Panel } from '../../../lib/components/Panel'
+import { Panel } from '../../../lib/components/panel/Panel'
 // CSS
 import './UnitPanel.css'
 
@@ -14,7 +14,7 @@ interface UnitPanelProperties {}
 export const UnitPanel = ({
 }: UnitPanelProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const dispatch = useDispatch()
   const [show, setShow] = useState<boolean>(false)
   const [actions, setActions] = useState<UnitOrder[]>([])
@@ -33,7 +33,7 @@ export const UnitPanel = ({
   }, [unitsSelected, currentPlayer])
   // #endregion
 
-  // #region Events
+  // #region > Events
   function handleActionClick(key: UnitOrder) {
     selectedUnits.forEach(id => {
       dispatch(GameSlice.actions.setUnitOrder({
@@ -44,7 +44,7 @@ export const UnitPanel = ({
   }
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   if (!show) {
     return null
   }

@@ -13,7 +13,7 @@ interface MapProperties {
 export const Map = ({
 }: MapProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const ref = useRef<HTMLDivElement>(null)
   const map = useSelector(GameSelectors.map)
   const playerCurrent = useSelector(GameSelectors.playerCurrent)
@@ -25,7 +25,7 @@ export const Map = ({
   }, [map])
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   return (
     <div 
       ref={ref}

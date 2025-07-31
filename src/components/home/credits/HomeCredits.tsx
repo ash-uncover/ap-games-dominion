@@ -4,29 +4,27 @@ import { useTranslation } from 'react-i18next'
 // CSS
 import './HomeCredits.css'
 
+// #region Declaration
 interface HomeCreditsProperties {
 }
+// #endregion
 
+// #region Component
 export const HomeCredits = ({
 }: HomeCreditsProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const navigate = useNavigate()
   const { t } = useTranslation()
   // #endregion
 
-  // #region Events
+  // #region > Events
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   return (
-    <main className='ap-dom-home-index-credits'>
+    <main className='ap-dom-home-credits'>
       CREDITS
-      <button
-        onClick={() => { navigate('/') }}
-      >
-        {t('BACK')}
-      </button>
     </main>
   )
   // #endregion

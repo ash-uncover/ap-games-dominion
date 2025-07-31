@@ -1,10 +1,4 @@
 .ap-dom-app {
-  & > .ap-dom-app_credits {
-    position: absolute;
-    pointer-events: none;
-    bottom: 0.5rem;
-    right: 1rem;
-    font-style: italic;
-    color: grey;
-  }
+  height: 100%;
+  overflow: hidden;
 }

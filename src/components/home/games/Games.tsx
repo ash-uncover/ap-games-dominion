@@ -16,7 +16,7 @@ export const Games = ({
   service
 }: GamesProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -31,7 +31,7 @@ export const Games = ({
   }, [state])
   // #endregion
 
-  // #region Events
+  // #region > Events
   function handleCreateClick() {
     navigate('new');
   }
@@ -46,7 +46,7 @@ export const Games = ({
   }
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   switch (state) {
     case DataStates.NEVER:
     case DataStates.FETCHING:

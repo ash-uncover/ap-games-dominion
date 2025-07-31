@@ -1,31 +1,31 @@
 import React from 'react'
-import { Outlet, useNavigate } from 'react-router'
-
 // CSS
 import './Home.css'
 
+// #region Declaration
 interface HomeProperties {
 }
+// #endregion
 
+// #region Component
 export const Home = ({
 }: HomeProperties) => {
 
-  // #region Hooks
-  const navigate = useNavigate()
+  // #region > Hooks
   // #endregion
 
-  // #region Events
+  // #region > Events
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   return (
     <div className='ap-dom-home'>
-      <div className='ap-dom-home_content'>
-        <Outlet />
+      HOME
+      <div>
+     
       </div>
     </div>
   )
   // #endregion
 }
-
-
+// #endregion

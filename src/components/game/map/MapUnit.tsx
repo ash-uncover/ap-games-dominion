@@ -13,14 +13,14 @@ export const MapUnit = ({
   id
 }: MapUnitProperties) => {
 
-  // #region Hooks //
+  // #region > Hooks //
   const dispatch = useDispatch()
   const unit = useSelector(GameSelectors.unit(id))
   const player = useSelector(GameSelectors.player(unit.player))
   const currentPlayer = useSelector(GameSelectors.playerId)
   // #endregion
 
-  // #region Events
+  // #region > Events
   function handleClick(event: MouseEvent) {
     event.stopPropagation()
     dispatch(GameSlice.actions.selectTile({ id: unit.tile }))

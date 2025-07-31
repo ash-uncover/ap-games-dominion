@@ -10,12 +10,12 @@ export const UnitsPanelUnit = ({
   id
 }: UnitsPanelUnitProperties) => {
 
-  // #region Hooks //
+  // #region > Hooks //
   const unit = useSelector(GameSelectors.unit(id))
   const player = useSelector(GameSelectors.player(unit.player))
   // #endregion
 
-  // #region Events
+  // #region > Events
   // #endregion
 
   // Rendering //

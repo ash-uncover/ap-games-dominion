@@ -1,33 +1,30 @@
 import React from 'react'
-import { useNavigate } from 'react-router'
-import { useTranslation } from 'react-i18next'
+import * as ReactI18n from 'react-i18next'
 // CSS
 import './HomeSettingsGame.css'
 
+// #region Declaration
 interface HomeSettingsGameProperties {
 }
+// #endregion
 
+// #region Component
 export const HomeSettingsGame = ({
 }: HomeSettingsGameProperties) => {
 
-  // #region Hooks
-  const navigate = useNavigate()
-  const { t } = useTranslation()
+  // #region > Hooks
+  const { t } = ReactI18n.useTranslation()
   // #endregion
 
-  // #region Events
+  // #region > Events
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   return (
     <main className='ap-dom-home-settings-game'>
       SETTINGS GAME
-      <button
-        onClick={() => { navigate('/settings') }}
-      >
-        {t('BACK')}
-      </button>
     </main>
   )
   // #endregion
 }
+// #endregion

@@ -9,22 +9,26 @@
       "menu": "Home",
       "title": "Home",
       "play": {
-        "menu": "Play",
+        "name": "Play",
+        "description": "Create new game or load an saved one",
         "new": {
-          "menu": "Create New Game"
+          "name": "New",
+          "description": "Create new game"
         },
         "load": {
-          "menu": "Continue Game"
+          "name": "Load",
+          "description": "Load saved game"
         },
         "online": {
-          "menu": "Online"
+          "name": "Online",
+          "description": "Start new online game"
         }
       },
       "settings": {
-        "menu": "Settings",
-        "general": {
-          "menu": "General",
-          "title": "General Settings",
+        "name": "Settings",
+        "game": {
+          "name": "General",
+          "description": "General Settings",
           "lang": {
             "title": "Language"
           },
@@ -36,8 +40,8 @@
           }
         },
         "audio": {
-          "menu": "Audio",
-          "title": "Audio Settings",
+          "name": "Audio",
+          "description": "Audio Settings",
           "master": {
             "title": "Master Volume",
             "enable": "Enable sounds"
@@ -56,8 +60,8 @@
           }
         },
         "display": {
-          "menu": "Display",
-          "title": "Display Settings",
+          "name": "Display",
+          "description": "Display Settings",
           "brightness": {
             "title": "Brightness"
           },
@@ -67,8 +71,8 @@
         }
       },
       "credits": {
-        "menu": "Credits",
-        "title": "Credits",
+        "name": "Credits",
+        "description": "Credits",
         "art": {
           "title": "Arts"
         }

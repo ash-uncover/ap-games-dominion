@@ -6,11 +6,11 @@ interface GameRedirectProperties {}
 export const GameRedirect = ({
 }: GameRedirectProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   let { gameId } = useParams();
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   return (
     <Navigate
       to={`/games/${gameId}`}

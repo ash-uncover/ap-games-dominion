@@ -1,0 +1,8 @@
+.ap-dom-home-credits {
+  position: absolute;
+  pointer-events: none;
+  bottom: 0.5rem;
+  right: 1rem;
+  font-style: italic;
+  color: grey;
+}

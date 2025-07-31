@@ -10,12 +10,12 @@ export const TilePanelUnit = ({
   id
 }: TilePanelUnitProperties) => {
 
-  // #region Hooks //
+  // #region > Hooks //
   const unit = useSelector(GameSelectors.unit(id))
   const player = useSelector(GameSelectors.player(unit.player))
   // #endregion
 
-  // #region Events
+  // #region > Events
   // #endregion
 
   // Rendering //

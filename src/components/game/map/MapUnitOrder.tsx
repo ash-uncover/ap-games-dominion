@@ -15,13 +15,13 @@ export const MapUnitOrder = ({
   id
 }: MapUnitOrderProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const dispatch = useDispatch()
   const unit = useSelector(GameSelectors.unit(id))
   const tile = useSelector(GameSelectors.tile(unit.tile))
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   const oddRow = (tile.y % 2) === 1
   const classes = ['ap-dom-map-unit-order']
   switch (unit.order?.key) {

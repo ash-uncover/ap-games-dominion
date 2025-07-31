@@ -13,6 +13,7 @@ import { GameSetupPlayer } from './GameSetupPlayer'
 import { PayloadGameInfoPut, PayloadGameInfoPutPlayer } from '../../../lib/model/payload/PayloadGameInfoPut'
 // CSS
 import './GameSetup.css'
+import { Button, Input } from '@sol.ac/react-commons'
 
 interface GameSetupProperties {
   service: GameService
@@ -23,7 +24,7 @@ export const GameSetup = ({
   onCreateGame,
 }: GameSetupProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const dispatch = useDispatch()
   const [name, setName] = useState('')
   const [nameError, setNameError] = useState('')
@@ -74,18 +75,18 @@ export const GameSetup = ({
   }, [name, width, height, players])
   // #endregion
 
-  // #region Events
-  function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setName(event.target.value)
+  // #region > Events
+  function handleNameChange(event: { value: string }) {
+    setName(event.value)
   }
-  function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value)
+  function handlePasswordChange(event: { value: string }) {
+    setPassword(event.value)
   }
-  function handleWidthChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setWidth(Number(event.target.value))
+  function handleWidthChange(event: { value: string }) {
+    setWidth(Number(event.value))
   }
-  function handleHeightChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setHeight(Number(event.target.value))
+  function handleHeightChange(event: { value: string }) {
+    setHeight(Number(event.value))
   }
   function handlePlayerChange(playerName: string, playerChange: PayloadGameInfoPutPlayer) {
     setPlayers(players => players.map(player => {
@@ -131,36 +132,51 @@ export const GameSetup = ({
   }
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   return (
     <div className='ap-dom-game-setup'>
       <h2>New Game</h2>
       <div>
         <label>Game Name</label>
-        <input value={name} onChange={handleNameChange} />
+        <Input 
+          value={name} 
+          onChange={handleNameChange} 
+        />
       </div>
       {nameError ?
         <div className='error'>{nameError}</div>
-      : null}
+        : null}
       <div>
         <label>Password</label>
-        <input type='password' value={password} onChange={handlePasswordChange} />
+        <Input
+          type='password'
+          value={password}
+          onChange={handlePasswordChange}
+        />
       </div>
       <h3>Map</h3>
       <div>
         <label>Width</label>
-        <input type='number' value={width} onChange={handleWidthChange} />
+        <Input 
+          type='number' 
+          value={`${width}`} 
+          onChange={handleWidthChange} 
+        />
       </div>
       <div>
         <label>Height</label>
-        <input type='number' value={height} onChange={handleHeightChange} />
+        <Input 
+          type='number' 
+          value={`${height}`} 
+          onChange={handleHeightChange} 
+        />
       </div>
       {widthError ?
         <div className='error'>{widthError}</div>
-      : null}
+        : null}
       {heightError ?
         <div className='error'>{heightError}</div>
-      : null}
+        : null}
       <h3>Players ({players.length})</h3>
       {players.map((player, index) =>
         <GameSetupPlayer
@@ -175,26 +191,26 @@ export const GameSetup = ({
       )}
       {playersError ?
         <div className='error'>{playersError}</div>
-      : null}
+        : null}
       <div>
-        <button
+        <Button
           onClick={handleAddPlayerClick}
         >
           add
-        </button>
+        </Button>
       </div>
       <div>
-        <button
+        <Button
           onClick={handleCancelClick}
         >
           Cancel
-        </button>
-        <button
+        </Button>
+        <Button
           disabled={disabled}
           onClick={handleStartClick}
         >
           Start
-        </button>
+        </Button>
       </div>
     </div>
   )

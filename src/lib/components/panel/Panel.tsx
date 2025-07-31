@@ -16,7 +16,7 @@ export const Panel = ({
   onClose
 }: PanelProperties) => {
 
-  // #region Events
+  // #region > Events
   // #endregion
 
   // Rendering // 

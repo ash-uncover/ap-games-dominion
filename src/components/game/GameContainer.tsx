@@ -10,7 +10,7 @@ export const GameContainer = ({
   children
 }: GameContainerProperties) => {
 
-  // #region Hooks //
+  // #region > Hooks //
   const ref = useRef<HTMLDivElement>(null)
   const refContent = useRef<HTMLDivElement>(null)
   
@@ -52,7 +52,7 @@ export const GameContainer = ({
 
   // #endregion
   
-  // #region Events
+  // #region > Events
   function handleDocumentMouseMove() {
     console.log('moving')
   }
@@ -81,7 +81,7 @@ export const GameContainer = ({
   }
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   const classes = ['ap-dom-game-container']
   if (moving) {
     classes.push('ap-dom-game-container--moving')

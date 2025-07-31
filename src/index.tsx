@@ -37,7 +37,7 @@ const containerRoot = document.getElementById('reactroot')!
 const root = createRoot(containerRoot)
 
 root.render(
-  <WardProvider plugin={CONFIG.AP_GAMES_DOMINION_PLUGIN}>
+  // <WardProvider plugin={CONFIG.AP_GAMES_DOMINION_PLUGIN}>
     <Provider store={store}>
       <App>
         <Router>
@@ -45,8 +45,8 @@ root.render(
         </Router>
       </App>
     </Provider>
-    {CONFIG.AP_GAMES_DOMINION_ENVIRONMENT === 'local' ?
-      <WardDevTools />
-      : null}
-  </WardProvider >
+  //   {CONFIG.AP_GAMES_DOMINION_ENVIRONMENT === 'local' ?
+  //     <WardDevTools />
+  //     : null}
+  // </WardProvider >
 )

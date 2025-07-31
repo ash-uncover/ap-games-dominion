@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import GameSelectors from '../../../store/game/game.selectors'
-import { Panel } from '../../../lib/components/Panel'
+import { Panel } from '../../../lib/components/panel/Panel'
 import { TilePanelBuilding } from './TilePanelBuilding'
 import { TilePanelUnit } from './TilePanelUnit'
 
@@ -12,7 +12,7 @@ interface TilePanelProperties {}
 export const TilePanel = ({
 }: TilePanelProperties) => {
 
-  // #region Hooks //
+  // #region > Hooks //
   const [show, setShow] = useState<boolean>(false)
   
   const selectedTile = useSelector(GameSelectors.selectedTile)
@@ -23,7 +23,7 @@ export const TilePanel = ({
   }, [selectedTile])
   // #endregion
 
-  // #region Events
+  // #region > Events
   function handleClose() {
     setShow(false)
   }

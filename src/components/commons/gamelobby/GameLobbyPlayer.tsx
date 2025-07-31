@@ -16,17 +16,17 @@ export const GameLobbyPlayer = ({
   onClick,
 }: GameLobbyPlayerProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const player = useSelector(GamesSelectors.player(gameId, playerId))
   // #endregion
 
-  // #region Events
+  // #region > Events
   function handleClick() {
     onClick()
   }
   // #endregion
 
-  // #region Rendering
+  // #region > Render
 
   return (
     <div className='ap-dom-game-lobby-player'>

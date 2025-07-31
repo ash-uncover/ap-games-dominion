@@ -10,11 +10,11 @@ export const GameHome = ({
   gameId
 }: GameHomeProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const players = useSelector(GameSelectors.players)
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   return (
     <div className='ap-dom-game-home'>
       Game Home {gameId}

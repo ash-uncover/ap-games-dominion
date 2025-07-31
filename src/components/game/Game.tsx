@@ -25,7 +25,7 @@ export const Game = ({
   service
 }: GameProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   const dispatch = useDispatch()
   const params = useParams()
   const gameId = useSelector(GameSelectors.gameId)
@@ -33,7 +33,7 @@ export const Game = ({
   const getGameTurnState = useSelector(GameSelectors.getGameTurnState)
   // #endregion
 
-  // #region Events
+  // #region > Events
   useEffect(() => {
     dispatch(GameSlice.actions.getGameTurnOutdate())
   }, [])
@@ -45,7 +45,7 @@ export const Game = ({
   }, [params, getGameTurnState])
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   if (gameId !== params.gameId || playerId !== params.playerId) {
     return (
       <div className='ap-dom-game'>

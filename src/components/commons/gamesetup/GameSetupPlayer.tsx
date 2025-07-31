@@ -4,6 +4,7 @@ import { PlayerLevel } from '../../../lib/model/constants/PlayerLevel'
 import { PayloadGameInfoPutPlayer } from '../../../lib/model/payload/PayloadGameInfoPut'
 // CSS
 import './GameSetupPlayer.css'
+import { Button, Input } from '@sol.ac/react-commons'
 
 interface GameSetupPlayerProperties {
   name: string
@@ -23,22 +24,22 @@ export const GameSetupPlayer = ({
   onDelete
 }: GameSetupPlayerProperties) => {
 
-  // #region Hooks
+  // #region > Hooks
   // #endregion
 
-  // #region Events
-  function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
+  // #region > Events
+  function handleNameChange(event: { value: string }) {
     onChange({
-      name: event.target.value,
+      name: event.value,
       nation,
       type,
       level
     })
   }
-  function handleNationChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleNationChange(event: { value: string }) {
     onChange({
       name,
-      nation: event.target.value,
+      nation: event.value,
       type,
       level
     })
@@ -48,14 +49,31 @@ export const GameSetupPlayer = ({
   }
   // #endregion
 
-  // #region Rendering
+  // #region > Render
   return (
     <div className='ap-dom-game-setup-player'>
-      <label>Name</label>
-      <input value={name} onChange={handleNameChange} />
-      <label>Nation</label>
-      <input value={nation || ''} onChange={handleNationChange} />
-      <button onClick={handleDeleteClick}>del</button>
+      <div className='ap-dom-game-setup-player__section'>
+        <label>Name</label>
+        <Input
+          value={name}
+          onChange={handleNameChange}
+        />
+      </div>
+      
+      <div className='ap-dom-game-setup-player__section'>
+        <label>Nation</label>
+        <Input
+          value={nation || ''}
+          onChange={handleNationChange}
+        />
+      </div>
+
+      <Button
+        className='ap-dom-game-setup-player__section'
+        onClick={handleDeleteClick}
+      >
+        del
+      </Button>
     </div>
   )
   // #endregion
